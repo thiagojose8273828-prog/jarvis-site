@@ -19,64 +19,164 @@
     </div>
   </div>
 
-  <!-- Partículas azuis -->
   <div class="particles"></div>
 
-  <!-- Barra superior -->
-  <header class="top-bar">
-    <div class="logo">INDÚSTRIAS TH</div>
-    <div id="clock">00:00:00</div>
-  </header>
+  <!-- Tela de login -->
+  <section class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <h1>INDÚSTRIAS TH</h1>
+      <p class="login-subtitle">Sistema J.A.R.V.I.S — Acesso Restrito</p>
 
-  <!-- Conteúdo principal -->
-  <main class="container">
-    <section class="hero">
-      <p class="tag">Sistema Inteligente Stark</p>
-
-      <h1>J.A.R.V.I.S Online</h1>
-
-      <p class="subtitle">
-        Interface futurista da Indústrias TH criada para organizar estudos,
-        projetos, tarefas e informações importantes.
-      </p>
-
-      <div class="status-box">
-        <span>Status:</span>
-        <strong id="statusText">INICIALIZANDO...</strong>
+      <div class="input-group">
+        <label>Usuário</label>
+        <input type="text" id="username" placeholder="Digite seu usuário">
       </div>
 
-      <button id="startButton">Iniciar Sistema</button>
-    </section>
-
-    <!-- Terminal -->
-    <section class="terminal-area">
-      <h2>Terminal</h2>
-      <div id="terminal"></div>
-    </section>
-
-    <!-- Cards -->
-    <section class="cards-area">
-      <div class="card">
-        <h3>Projetos</h3>
-        <p>Organização de sites, códigos, tarefas e sistemas.</p>
+      <div class="input-group">
+        <label>Senha</label>
+        <input type="password" id="password" placeholder="Digite sua senha">
       </div>
 
-      <div class="card">
-        <h3>Estudos</h3>
-        <p>Resumo, revisão e organização de conteúdos escolares.</p>
-      </div>
+      <button id="loginButton">Entrar no Sistema</button>
 
-      <div class="card">
-        <h3>Agenda</h3>
-        <p>Controle de compromissos, datas importantes e lembretes.</p>
-      </div>
-    </section>
-  </main>
+      <p class="login-hint">Dica: usuário <strong>stark</strong> | senha <strong>1234</strong></p>
+      <p id="loginMessage"></p>
+    </div>
+  </section>
 
-  <!-- Rodapé -->
-  <footer>
-    <p>Indústrias TH — Sistema desenvolvido por sr.stark com J.A.R.V.I.S</p>
-  </footer>
+  <!-- Sistema principal -->
+  <section class="system-screen hidden" id="systemScreen">
+
+    <header class="top-bar">
+      <div class="logo">INDÚSTRIAS TH</div>
+      <div class="top-info">
+        <span id="clock">00:00:00</span>
+        <button id="logoutButton">Sair</button>
+      </div>
+    </header>
+
+    <main class="dashboard">
+
+      <!-- Menu lateral -->
+      <aside class="sidebar">
+        <h2>J.A.R.V.I.S</h2>
+        <nav>
+          <button class="menu-btn active">Início</button>
+          <button class="menu-btn">Pesquisa</button>
+          <button class="menu-btn">Estudos</button>
+          <button class="menu-btn">Projetos</button>
+          <button class="menu-btn">Agenda</button>
+          <button class="menu-btn">Sistema</button>
+        </nav>
+      </aside>
+
+      <!-- Área central -->
+      <section class="main-panel">
+
+        <section class="hero">
+          <p class="tag">Sistema Inteligente Stark</p>
+          <h1>J.A.R.V.I.S Online</h1>
+          <p class="subtitle">
+            Central inteligente da Indústrias TH para estudos, projetos, pesquisas,
+            tarefas e organização pessoal.
+          </p>
+
+          <div class="status-box">
+            <span>Status:</span>
+            <strong id="statusText">INICIALIZANDO...</strong>
+          </div>
+
+          <button id="startButton">Iniciar Sistema</button>
+        </section>
+
+        <!-- Ferramenta de pesquisa -->
+        <section class="search-area">
+          <h2>Pesquisa J.A.R.V.I.S</h2>
+          <p>Pergunte algo para o sistema responder.</p>
+
+          <div class="search-box">
+            <input type="text" id="questionInput" placeholder="Ex: o que é Scrum?">
+            <button id="askButton">Pesquisar</button>
+          </div>
+
+          <div class="answer-box" id="answerBox">
+            <p>J.A.R.V.I.S aguardando sua pergunta...</p>
+          </div>
+        </section>
+
+        <!-- Terminal -->
+        <section class="terminal-area">
+          <h2>Terminal</h2>
+          <div id="terminal"></div>
+
+          <div class="command-box">
+            <input type="text" id="commandInput" placeholder="Digite um comando: ajuda, status, limpar...">
+            <button id="commandButton">Enviar</button>
+          </div>
+        </section>
+
+        <!-- Cards -->
+        <section class="cards-area">
+          <div class="card">
+            <h3>Projetos</h3>
+            <p>Organização de sites, códigos, tarefas e sistemas.</p>
+          </div>
+
+          <div class="card">
+            <h3>Estudos</h3>
+            <p>Resumo, revisão e organização de conteúdos escolares.</p>
+          </div>
+
+          <div class="card">
+            <h3>Agenda</h3>
+            <p>Controle de compromissos, datas importantes e lembretes.</p>
+          </div>
+
+          <div class="card">
+            <h3>Pesquisa</h3>
+            <p>Ferramenta para perguntas e respostas rápidas.</p>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- Status lateral -->
+      <aside class="status-panel">
+        <h2>Status</h2>
+
+        <div class="status-item">
+          <span>Sistema</span>
+          <strong>Online</strong>
+        </div>
+
+        <div class="status-item">
+          <span>Energia</span>
+          <strong>100%</strong>
+        </div>
+
+        <div class="status-item">
+          <span>Modo</span>
+          <strong>Assistente</strong>
+        </div>
+
+        <div class="status-item">
+          <span>Rede</span>
+          <strong>Ativa</strong>
+        </div>
+
+        <div class="status-item">
+          <span>Segurança</span>
+          <strong>Estável</strong>
+        </div>
+      </aside>
+
+    </main>
+
+    <footer>
+      <p>Indústrias TH — Sistema desenvolvido por sr.stark com J.A.R.V.I.S</p>
+    </footer>
+
+  </section>
 
   <script src="script.js"></script>
 </body>
