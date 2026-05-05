@@ -1,0 +1,16 @@
+{
+  "name": "jarvis-core",
+  "version": "1.0.0",
+  "description": "J.A.R.V.I.S CORE - Indústrias TH com Claude API",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.60.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0"
+  }
+}
