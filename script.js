@@ -1,9 +1,12 @@
 // ======================================================
-// J.A.R.V.I.S - INDÚSTRIAS TH
-// Script principal do sistema
+// J.A.R.V.I.S CORE - INDÚSTRIAS TH
+// SCRIPT PRINCIPAL - FASE 1
 // ======================================================
 
-// ---------- Elementos principais ----------
+// ===============================
+// ELEMENTOS PRINCIPAIS
+// ===============================
+
 const loginScreen = document.querySelector("#loginScreen");
 const systemScreen = document.querySelector("#systemScreen");
 
@@ -17,30 +20,30 @@ const terminal = document.querySelector("#terminal");
 const statusText = document.querySelector("#statusText");
 const startButton = document.querySelector("#startButton");
 const cards = document.querySelectorAll(".card");
-
 const clock = document.querySelector("#clock");
-
-const questionInput = document.querySelector("#questionInput");
-const askButton = document.querySelector("#askButton");
-const answerBox = document.querySelector("#answerBox");
-
-const commandInput = document.querySelector("#commandInput");
-const commandButton = document.querySelector("#commandButton");
 
 const menuButtons = document.querySelectorAll(".menu-btn");
 
-// ---------- Configurações ----------
+// ===============================
+// LOGIN PADRÃO
+// ===============================
+
 const validUser = "stark";
 const validPassword = "1234";
 
+// ===============================
+// LINHAS DE INICIALIZAÇÃO
+// ===============================
+
 const bootLines = [
-  "Inicializando protocolo J.A.R.V.I.S...",
+  "Inicializando protocolo J.A.R.V.I.S CORE...",
   "Carregando núcleo energético da Indústrias TH...",
-  "Ativando partículas azuis...",
-  "Sincronizando módulos: pesquisa, estudos, agenda e sistema...",
+  "Ativando HUD Reactor...",
+  "Sincronizando módulos principais...",
+  "Carregando IA Geral local...",
+  "Preparando Estudos, Projetos, Agenda e Missões...",
   "Verificando segurança da interface...",
-  "Conectando ao núcleo Stark...",
-  "Interface online. Bem-vindo, sr.stark."
+  "Sistema online. Bem-vindo, sr.stark."
 ];
 
 let lineIndex = 0;
@@ -62,9 +65,9 @@ function login() {
       loginScreen.classList.add("hidden");
       systemScreen.classList.remove("hidden");
 
-      bootJarvis();
       showModule("inicio");
-    }, 900);
+      bootJarvis();
+    }, 800);
   } else {
     loginMessage.textContent = "Acesso negado. Usuário ou senha incorretos.";
     loginMessage.classList.remove("success");
@@ -80,9 +83,7 @@ function logout() {
   passwordInput.value = "";
   loginMessage.textContent = "";
 
-  if (terminal) {
-    terminal.innerHTML = "";
-  }
+  if (terminal) terminal.innerHTML = "";
 
   if (statusText) {
     statusText.textContent = "INICIALIZANDO...";
@@ -107,7 +108,7 @@ if (passwordInput) {
 }
 
 // ======================================================
-// TERMINAL / BOOT
+// TERMINAL
 // ======================================================
 
 function typeLine(text, callback) {
@@ -138,6 +139,7 @@ function addTerminalLine(text) {
   const line = document.createElement("p");
   line.classList.add("terminal-line");
   line.textContent = text;
+
   terminal.appendChild(line);
   terminal.scrollTop = terminal.scrollHeight;
 }
@@ -161,7 +163,7 @@ function bootJarvis() {
     if (lineIndex < bootLines.length) {
       typeLine(bootLines[lineIndex], () => {
         lineIndex++;
-        setTimeout(nextLine, 380);
+        setTimeout(nextLine, 360);
       });
     } else {
       activateSystem();
@@ -192,51 +194,42 @@ if (startButton) {
 }
 
 // ======================================================
-// MENU INTERATIVO
+// MÓDULOS
 // ======================================================
 
 function showModule(moduleName) {
-  // Remove ativo dos botões
-  menuButtons.forEach((button) => {
-    button.classList.remove("active");
-  });
-
-  // Ativa botão clicado pelo texto
-  menuButtons.forEach((button) => {
-    const buttonText = button.textContent.trim().toLowerCase();
-
-    if (
-      buttonText === moduleName ||
-      (moduleName === "inicio" && buttonText === "início")
-    ) {
-      button.classList.add("active");
-    }
-  });
-
-  // Esconde todas as áreas que existirem
-  const sections = {
-    inicio: document.querySelector(".hero"),
-    pesquisa: document.querySelector(".search-area"),
+  const modules = {
+    inicio: document.querySelector("#moduleInicio"),
+    ia: document.querySelector("#moduleIa"),
     estudos: document.querySelector("#moduleEstudos"),
     projetos: document.querySelector("#moduleProjetos"),
     agenda: document.querySelector("#moduleAgenda"),
+    financas: document.querySelector("#moduleFinancas"),
+    habitos: document.querySelector("#moduleHabitos"),
+    musica: document.querySelector("#moduleMusica"),
+    documentos: document.querySelector("#moduleDocumentos"),
+    pesquisa: document.querySelector("#modulePesquisa"),
+    missoes: document.querySelector("#moduleMissoes"),
     sistema: document.querySelector("#moduleSistema")
   };
 
-  Object.values(sections).forEach((section) => {
-    if (section) section.classList.add("hidden-module");
+  Object.values(modules).forEach((module) => {
+    if (module) {
+      module.classList.add("hidden-module");
+    }
   });
 
-  // Mostra módulo escolhido
-  const selected = sections[moduleName];
-
-  if (selected) {
-    selected.classList.remove("hidden-module");
+  if (modules[moduleName]) {
+    modules[moduleName].classList.remove("hidden-module");
   }
 
-  // Mantém terminal visível sempre
-  const terminalArea = document.querySelector(".terminal-area");
-  if (terminalArea) terminalArea.classList.remove("hidden-module");
+  menuButtons.forEach((button) => {
+    button.classList.remove("active");
+
+    if (button.dataset.module === moduleName) {
+      button.classList.add("active");
+    }
+  });
 
   addTerminalLine(`Módulo aberto: ${formatModuleName(moduleName)}.`);
 }
@@ -244,10 +237,16 @@ function showModule(moduleName) {
 function formatModuleName(name) {
   const names = {
     inicio: "Início",
-    pesquisa: "Pesquisa",
+    ia: "IA Geral",
     estudos: "Estudos",
     projetos: "Projetos",
     agenda: "Agenda",
+    financas: "Finanças",
+    habitos: "Saúde/Hábitos",
+    musica: "Música/Vibe",
+    documentos: "Documentos",
+    pesquisa: "Pesquisa",
+    missoes: "Missões",
     sistema: "Sistema"
   };
 
@@ -256,215 +255,106 @@ function formatModuleName(name) {
 
 menuButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const text = button.textContent.trim().toLowerCase();
-
-    if (text === "início") showModule("inicio");
-    if (text === "pesquisa") showModule("pesquisa");
-    if (text === "estudos") showModule("estudos");
-    if (text === "projetos") showModule("projetos");
-    if (text === "agenda") showModule("agenda");
-    if (text === "sistema") showModule("sistema");
+    showModule(button.dataset.module);
   });
 });
 
 // ======================================================
-// CRIAÇÃO AUTOMÁTICA DOS MÓDULOS
-// Caso o HTML ainda não tenha essas áreas, o JS cria.
+// IA GERAL LOCAL
 // ======================================================
 
-function createExtraModules() {
-  const mainPanel = document.querySelector(".main-panel");
-  if (!mainPanel) return;
-
-  if (!document.querySelector("#moduleEstudos")) {
-    const estudos = document.createElement("section");
-    estudos.id = "moduleEstudos";
-    estudos.className = "module-area hidden-module";
-    estudos.innerHTML = `
-      <h2>Modo Estudos</h2>
-      <p>Área para organizar matérias, resumos e tarefas escolares.</p>
-
-      <div class="tool-grid">
-        <div class="tool-card">
-          <h3>Resumo rápido</h3>
-          <textarea id="studyText" placeholder="Cole um texto aqui para organizar em tópicos..."></textarea>
-          <button id="studyButton">Organizar texto</button>
-          <div id="studyResult" class="tool-result">Aguardando conteúdo...</div>
-        </div>
-
-        <div class="tool-card">
-          <h3>Matérias</h3>
-          <ul>
-            <li>Gestão de Projetos</li>
-            <li>Química</li>
-            <li>Filosofia</li>
-            <li>Biologia</li>
-          </ul>
-        </div>
-      </div>
-    `;
-    mainPanel.appendChild(estudos);
-  }
-
-  if (!document.querySelector("#moduleProjetos")) {
-    const projetos = document.createElement("section");
-    projetos.id = "moduleProjetos";
-    projetos.className = "module-area hidden-module";
-    projetos.innerHTML = `
-      <h2>Projetos</h2>
-      <p>Central para acompanhar sites, códigos e sistemas da Indústrias TH.</p>
-
-      <div class="tool-grid">
-        <div class="tool-card">
-          <h3>Projeto ativo</h3>
-          <p><strong>J.A.R.V.I.S Web System</strong></p>
-          <p>Status: Em desenvolvimento</p>
-          <p>Objetivo: Criar uma central inteligente pessoal.</p>
-        </div>
-
-        <div class="tool-card">
-          <h3>Próximas melhorias</h3>
-          <ul>
-            <li>Login avançado</li>
-            <li>Pesquisa com IA real</li>
-            <li>Agenda interativa</li>
-            <li>Banco de dados</li>
-          </ul>
-        </div>
-      </div>
-    `;
-    mainPanel.appendChild(projetos);
-  }
-
-  if (!document.querySelector("#moduleAgenda")) {
-    const agenda = document.createElement("section");
-    agenda.id = "moduleAgenda";
-    agenda.className = "module-area hidden-module";
-    agenda.innerHTML = `
-      <h2>Agenda</h2>
-      <p>Área para organizar compromissos, lembretes e datas importantes.</p>
-
-      <div class="tool-card">
-        <h3>Adicionar lembrete local</h3>
-        <div class="agenda-form">
-          <input type="text" id="agendaInput" placeholder="Ex: Estudar UC2 às 19h">
-          <button id="agendaButton">Adicionar</button>
-        </div>
-        <ul id="agendaList" class="agenda-list">
-          <li>Dia das Mães — 10/05</li>
-          <li>Corpus Christi — 04/06</li>
-        </ul>
-      </div>
-    `;
-    mainPanel.appendChild(agenda);
-  }
-
-  if (!document.querySelector("#moduleSistema")) {
-    const sistema = document.createElement("section");
-    sistema.id = "moduleSistema";
-    sistema.className = "module-area hidden-module";
-    sistema.innerHTML = `
-      <h2>Sistema</h2>
-      <p>Status geral do J.A.R.V.I.S da Indústrias TH.</p>
-
-      <div class="system-grid">
-        <div class="system-card">
-          <span>Sistema</span>
-          <strong>Online</strong>
-        </div>
-
-        <div class="system-card">
-          <span>Núcleo</span>
-          <strong>Estável</strong>
-        </div>
-
-        <div class="system-card">
-          <span>Energia</span>
-          <strong>100%</strong>
-        </div>
-
-        <div class="system-card">
-          <span>Interface</span>
-          <strong>Azul Neon</strong>
-        </div>
-      </div>
-    `;
-    mainPanel.appendChild(sistema);
-  }
-}
-
-// ======================================================
-// PESQUISA J.A.R.V.I.S
-// ======================================================
+const aiInput = document.querySelector("#aiInput");
+const aiButton = document.querySelector("#aiButton");
+const aiAnswer = document.querySelector("#aiAnswer");
 
 function askJarvis() {
-  if (!questionInput || !answerBox) return;
+  if (!aiInput || !aiAnswer) return;
 
-  const question = questionInput.value.trim();
+  const question = aiInput.value.trim();
 
   if (!question) {
-    answerBox.innerHTML = "<p>Digite uma pergunta para o J.A.R.V.I.S responder.</p>";
+    aiAnswer.innerHTML = "<p>Digite uma pergunta para o J.A.R.V.I.S responder.</p>";
     return;
   }
 
   const response = generateLocalAnswer(question);
 
-  answerBox.innerHTML = `
+  aiAnswer.innerHTML = `
     <h3>Resposta J.A.R.V.I.S</h3>
     <p>${response}</p>
   `;
 
-  addTerminalLine(`Pesquisa executada: "${question}"`);
+  addTerminalLine(`IA Geral processou: "${question}"`);
 }
 
 function generateLocalAnswer(question) {
   const q = question.toLowerCase();
 
   if (q.includes("scrum")) {
-    return "Scrum é uma metodologia ágil usada para organizar projetos em ciclos curtos chamados Sprints. Ela trabalha com papéis como Product Owner, Scrum Master e equipe de desenvolvimento.";
+    return "Scrum é uma metodologia ágil usada para organizar projetos em ciclos curtos chamados Sprints. Ela ajuda equipes a entregar valor de forma incremental.";
   }
 
   if (q.includes("kanban")) {
-    return "Kanban é um método visual de organização de tarefas. Normalmente usa colunas como A fazer, Em andamento e Concluído.";
+    return "Kanban é um método visual para organizar tarefas. Ele costuma usar colunas como A fazer, Em andamento e Concluído.";
   }
 
   if (q.includes("backlog")) {
-    return "Backlog é a lista de funcionalidades, tarefas ou demandas de um projeto. Ele deve ser priorizado conforme valor, urgência e dependências.";
+    return "Backlog é uma lista de tarefas, funcionalidades ou demandas de um projeto. Ele deve ser priorizado conforme valor, urgência e dependências.";
   }
 
   if (q.includes("mvp")) {
-    return "MVP significa Produto Mínimo Viável. É a primeira versão funcional de um sistema, contendo apenas o essencial para entregar valor ao usuário.";
+    return "MVP significa Produto Mínimo Viável. É a primeira versão funcional de um produto, com apenas o essencial para entregar valor.";
   }
 
   if (q.includes("html")) {
-    return "HTML é a linguagem usada para criar a estrutura de uma página web, como títulos, textos, botões, seções e links.";
+    return "HTML é a linguagem usada para criar a estrutura de páginas web, como títulos, textos, seções, botões e links.";
   }
 
   if (q.includes("css")) {
-    return "CSS é usado para estilizar o site, definindo cores, layout, animações, fontes e aparência visual.";
+    return "CSS é usado para deixar o site bonito, definindo cores, fontes, layout, animações e responsividade.";
   }
 
   if (q.includes("javascript") || q.includes("js")) {
-    return "JavaScript é a linguagem que adiciona interatividade ao site, como botões funcionando, animações, login e respostas dinâmicas.";
+    return "JavaScript adiciona interatividade ao site, como login, botões funcionando, respostas, animações e comandos.";
+  }
+
+  if (q.includes("finança") || q.includes("dinheiro") || q.includes("gasto")) {
+    return "Para organizar finanças, registre entradas, gastos, metas e saldo. O ideal é separar o dinheiro por prioridade: essencial, objetivo e lazer.";
+  }
+
+  if (q.includes("rotina") || q.includes("hábitos") || q.includes("habitos")) {
+    return "Uma rotina boa começa com poucos hábitos consistentes: dormir melhor, beber água, estudar em horários fixos e revisar suas metas do dia.";
+  }
+
+  if (q.includes("música") || q.includes("musica") || q.includes("playlist")) {
+    return "Pelo seu estilo, uma boa vibe mistura rap/trap, R&B, indie, funk/brasilidades e músicas noturnas com energia de protagonista.";
+  }
+
+  if (q.includes("documento") || q.includes("pdf") || q.includes("texto")) {
+    return "Para organizar documentos, o ideal é separar por tema, destacar ideias principais, resumir em tópicos e criar uma conclusão simples.";
+  }
+
+  if (q.includes("missão") || q.includes("missao") || q.includes("objetivo")) {
+    return "Uma missão deve ser dividida em passos pequenos: objetivo principal, tarefas, prioridade, prazo e acompanhamento.";
   }
 
   if (q.includes("jarvis")) {
-    return "J.A.R.V.I.S é o sistema inteligente da Indústrias TH, criado para auxiliar em estudos, projetos, agenda, pesquisas e organização pessoal.";
+    return "J.A.R.V.I.S CORE é a central inteligente da Indústrias TH, criada para ajudar com perguntas, estudos, projetos, rotina, finanças, documentos e missões.";
   }
 
   if (q.includes("indústrias th") || q.includes("industrias th")) {
-    return "Indústrias TH é a identidade principal deste projeto, funcionando como a central tecnológica criada por sr.stark.";
+    return "Indústrias TH é a identidade do seu projeto, funcionando como uma central tecnológica criada por sr.stark.";
   }
 
-  return "Ainda não tenho uma resposta completa para isso no modo local. Posso registrar essa pergunta como missão futura ou abrir uma busca externa quando o sistema evoluir com API.";
+  return "Ainda não tenho uma resposta completa para isso no modo local. Na Fase 2, com API de IA real, poderei responder perguntas muito mais amplas e complexas.";
 }
 
-if (askButton) {
-  askButton.addEventListener("click", askJarvis);
+if (aiButton) {
+  aiButton.addEventListener("click", askJarvis);
 }
 
-if (questionInput) {
-  questionInput.addEventListener("keydown", (event) => {
+if (aiInput) {
+  aiInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       askJarvis();
     }
@@ -472,12 +362,346 @@ if (questionInput) {
 }
 
 // ======================================================
+// ESTUDOS
+// ======================================================
+
+const studyButton = document.querySelector("#studyButton");
+const studyText = document.querySelector("#studyText");
+const studyResult = document.querySelector("#studyResult");
+
+if (studyButton) {
+  studyButton.addEventListener("click", () => {
+    const text = studyText.value.trim();
+
+    if (!text) {
+      studyResult.textContent = "Cole um texto primeiro para organizar.";
+      return;
+    }
+
+    const sentences = text
+      .split(".")
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0)
+      .slice(0, 6);
+
+    studyResult.innerHTML = `
+      <strong>Resumo em tópicos:</strong>
+      <ul>
+        ${sentences.map((sentence) => `<li>${sentence}.</li>`).join("")}
+      </ul>
+    `;
+
+    addTerminalLine("Texto de estudos organizado em tópicos.");
+  });
+}
+
+const exerciseTopic = document.querySelector("#exerciseTopic");
+const exerciseButton = document.querySelector("#exerciseButton");
+const exerciseResult = document.querySelector("#exerciseResult");
+
+if (exerciseButton) {
+  exerciseButton.addEventListener("click", () => {
+    const topic = exerciseTopic.value.trim();
+
+    if (!topic) {
+      exerciseResult.textContent = "Digite um tema para gerar exercícios.";
+      return;
+    }
+
+    exerciseResult.innerHTML = `
+      <strong>Exercícios sobre ${topic}:</strong>
+      <ol>
+        <li>Explique com suas palavras o que é ${topic}.</li>
+        <li>Cite um exemplo prático de uso de ${topic}.</li>
+        <li>Qual é a importância de ${topic} no dia a dia?</li>
+        <li>Crie um pequeno resumo sobre ${topic}.</li>
+      </ol>
+    `;
+
+    addTerminalLine(`Exercícios gerados sobre: ${topic}.`);
+  });
+}
+
+// ======================================================
+// PROJETOS
+// ======================================================
+
+const projectInput = document.querySelector("#projectInput");
+const projectButton = document.querySelector("#projectButton");
+const projectResult = document.querySelector("#projectResult");
+
+if (projectButton) {
+  projectButton.addEventListener("click", () => {
+    const project = projectInput.value.trim();
+
+    if (!project) {
+      projectResult.textContent = "Digite uma ideia de projeto.";
+      return;
+    }
+
+    projectResult.innerHTML = `
+      <strong>Checklist para ${project}:</strong>
+      <ul>
+        <li>Definir objetivo principal.</li>
+        <li>Listar funcionalidades essenciais.</li>
+        <li>Criar estrutura inicial dos arquivos.</li>
+        <li>Desenvolver primeira versão funcional.</li>
+        <li>Testar e corrigir erros.</li>
+        <li>Publicar ou apresentar o projeto.</li>
+      </ul>
+    `;
+
+    addTerminalLine(`Checklist criado para o projeto: ${project}.`);
+  });
+}
+
+// ======================================================
+// AGENDA
+// ======================================================
+
+const agendaInput = document.querySelector("#agendaInput");
+const agendaButton = document.querySelector("#agendaButton");
+const agendaList = document.querySelector("#agendaList");
+
+if (agendaButton) {
+  agendaButton.addEventListener("click", () => {
+    const item = agendaInput.value.trim();
+
+    if (!item) return;
+
+    const li = document.createElement("li");
+    li.textContent = item;
+
+    agendaList.appendChild(li);
+    agendaInput.value = "";
+
+    addTerminalLine(`Novo lembrete adicionado: ${item}.`);
+  });
+}
+
+// ======================================================
+// FINANÇAS
+// ======================================================
+
+const incomeInput = document.querySelector("#incomeInput");
+const expenseInput = document.querySelector("#expenseInput");
+const financeButton = document.querySelector("#financeButton");
+const financeResult = document.querySelector("#financeResult");
+
+if (financeButton) {
+  financeButton.addEventListener("click", () => {
+    const income = Number(incomeInput.value);
+    const expense = Number(expenseInput.value);
+    const balance = income - expense;
+
+    financeResult.innerHTML = `
+      <strong>Resultado financeiro:</strong>
+      <p>Entrada: R$ ${income.toFixed(2)}</p>
+      <p>Gasto: R$ ${expense.toFixed(2)}</p>
+      <p>Saldo: R$ ${balance.toFixed(2)}</p>
+    `;
+
+    addTerminalLine(`Finanças calculadas. Saldo: R$ ${balance.toFixed(2)}.`);
+  });
+}
+
+const moneyGoalInput = document.querySelector("#moneyGoalInput");
+const moneyGoalButton = document.querySelector("#moneyGoalButton");
+const moneyGoalList = document.querySelector("#moneyGoalList");
+
+if (moneyGoalButton) {
+  moneyGoalButton.addEventListener("click", () => {
+    const goal = moneyGoalInput.value.trim();
+
+    if (!goal) return;
+
+    const li = document.createElement("li");
+    li.textContent = goal;
+
+    moneyGoalList.appendChild(li);
+    moneyGoalInput.value = "";
+
+    addTerminalLine(`Meta financeira criada: ${goal}.`);
+  });
+}
+
+// ======================================================
+// SAÚDE / HÁBITOS
+// ======================================================
+
+const habitInput = document.querySelector("#habitInput");
+const habitButton = document.querySelector("#habitButton");
+const habitList = document.querySelector("#habitList");
+const routineButton = document.querySelector("#routineButton");
+const routineResult = document.querySelector("#routineResult");
+
+if (habitButton) {
+  habitButton.addEventListener("click", () => {
+    const habit = habitInput.value.trim();
+
+    if (!habit) return;
+
+    const li = document.createElement("li");
+    li.textContent = habit;
+
+    habitList.appendChild(li);
+    habitInput.value = "";
+
+    addTerminalLine(`Novo hábito adicionado: ${habit}.`);
+  });
+}
+
+if (routineButton) {
+  routineButton.addEventListener("click", () => {
+    routineResult.innerHTML = `
+      <strong>Rotina simples sugerida:</strong>
+      <ul>
+        <li>Manhã: beber água, organizar o dia e revisar prioridades.</li>
+        <li>Tarde: focar em tarefas principais e evitar distrações.</li>
+        <li>Noite: revisar o que foi feito e preparar o próximo dia.</li>
+        <li>Sono: tentar dormir em horário consistente.</li>
+      </ul>
+    `;
+
+    addTerminalLine("Rotina simples gerada.");
+  });
+}
+
+// ======================================================
+// MÚSICA / VIBE
+// ======================================================
+
+const vibeSelect = document.querySelector("#vibeSelect");
+const vibeButton = document.querySelector("#vibeButton");
+const vibeResult = document.querySelector("#vibeResult");
+
+if (vibeButton) {
+  vibeButton.addEventListener("click", () => {
+    const vibe = vibeSelect.value;
+
+    const vibes = {
+      foco: "Modo Foco: músicas calmas, beats leves, R&B suave e instrumentais.",
+      madrugada: "Modo Madrugada: trap melancólico, R&B noturno, Lana, Frank Ocean, The Weeknd e vibe protagonista.",
+      treino: "Modo Treino: trap pesado, rap energético, funk acelerado e batidas fortes.",
+      protagonista: "Modo Protagonista: músicas estilosas, noturnas, com energia de confiança e evolução."
+    };
+
+    vibeResult.innerHTML = `<p>${vibes[vibe]}</p>`;
+
+    addTerminalLine(`Vibe ativada: ${vibe}.`);
+  });
+}
+
+// ======================================================
+// DOCUMENTOS
+// ======================================================
+
+const documentText = document.querySelector("#documentText");
+const documentButton = document.querySelector("#documentButton");
+const documentResult = document.querySelector("#documentResult");
+
+if (documentButton) {
+  documentButton.addEventListener("click", () => {
+    const text = documentText.value.trim();
+
+    if (!text) {
+      documentResult.textContent = "Cole um documento ou texto primeiro.";
+      return;
+    }
+
+    const words = text.split(/\s+/).length;
+    const preview = text.slice(0, 220);
+
+    documentResult.innerHTML = `
+      <strong>Documento analisado:</strong>
+      <p>Total aproximado de palavras: ${words}</p>
+      <p><strong>Início do texto:</strong> ${preview}${text.length > 220 ? "..." : ""}</p>
+      <p>Sugestão: separe o documento em introdução, desenvolvimento e conclusão.</p>
+    `;
+
+    addTerminalLine("Documento organizado.");
+  });
+}
+
+// ======================================================
+// PESQUISA
+// ======================================================
+
+const researchInput = document.querySelector("#researchInput");
+const researchButton = document.querySelector("#researchButton");
+const researchResult = document.querySelector("#researchResult");
+
+if (researchButton) {
+  researchButton.addEventListener("click", () => {
+    const topic = researchInput.value.trim();
+
+    if (!topic) {
+      researchResult.textContent = "Digite um tema de pesquisa.";
+      return;
+    }
+
+    researchResult.innerHTML = `
+      <strong>Roteiro de pesquisa sobre ${topic}:</strong>
+      <ol>
+        <li>Definir o conceito principal de ${topic}.</li>
+        <li>Buscar exemplos práticos.</li>
+        <li>Listar vantagens e desvantagens.</li>
+        <li>Comparar com temas relacionados.</li>
+        <li>Criar um resumo final em tópicos.</li>
+      </ol>
+    `;
+
+    addTerminalLine(`Roteiro de pesquisa criado sobre: ${topic}.`);
+  });
+}
+
+// ======================================================
+// MISSÕES
+// ======================================================
+
+const missionInput = document.querySelector("#missionInput");
+const missionButton = document.querySelector("#missionButton");
+const missionResult = document.querySelector("#missionResult");
+const missionList = document.querySelector("#missionList");
+
+if (missionButton) {
+  missionButton.addEventListener("click", () => {
+    const mission = missionInput.value.trim();
+
+    if (!mission) {
+      missionResult.textContent = "Digite uma missão primeiro.";
+      return;
+    }
+
+    missionResult.innerHTML = `
+      <strong>Plano de ação para: ${mission}</strong>
+      <ol>
+        <li>Definir o resultado esperado.</li>
+        <li>Dividir a missão em tarefas pequenas.</li>
+        <li>Priorizar o que deve ser feito primeiro.</li>
+        <li>Executar uma etapa por vez.</li>
+        <li>Revisar o progresso no final do dia.</li>
+      </ol>
+    `;
+
+    const li = document.createElement("li");
+    li.textContent = mission;
+    missionList.appendChild(li);
+
+    missionInput.value = "";
+
+    addTerminalLine(`Missão criada: ${mission}.`);
+  });
+}
+
+// ======================================================
 // COMANDOS DO TERMINAL
 // ======================================================
 
-function runCommand() {
-  if (!commandInput) return;
+const commandInput = document.querySelector("#commandInput");
+const commandButton = document.querySelector("#commandButton");
 
+function runCommand() {
   const command = commandInput.value.trim().toLowerCase();
 
   if (!command) return;
@@ -485,40 +709,27 @@ function runCommand() {
   addTerminalLine(`> ${command}`);
   commandInput.value = "";
 
-  if (command === "ajuda") {
-    addTerminalLine("Comandos disponíveis: ajuda, status, pesquisa, estudos, projetos, agenda, sistema, limpar, reiniciar.");
+  const commands = {
+    ajuda: "Comandos: ajuda, status, ia, estudos, projetos, agenda, financas, habitos, musica, documentos, pesquisa, missoes, sistema, limpar, reiniciar.",
+    status: "J.A.R.V.I.S CORE ONLINE | Núcleo estável | HUD Reactor ativo | API IA prevista para Fase 2."
+  };
+
+  if (commands[command]) {
+    addTerminalLine(commands[command]);
     return;
   }
 
-  if (command === "status") {
-    addTerminalLine("J.A.R.V.I.S ONLINE | Núcleo estável | Energia 100% | Rede ativa.");
-    return;
-  }
-
-  if (command === "pesquisa") {
-    showModule("pesquisa");
-    return;
-  }
-
-  if (command === "estudos") {
-    showModule("estudos");
-    return;
-  }
-
-  if (command === "projetos") {
-    showModule("projetos");
-    return;
-  }
-
-  if (command === "agenda") {
-    showModule("agenda");
-    return;
-  }
-
-  if (command === "sistema") {
-    showModule("sistema");
-    return;
-  }
+  if (command === "ia") return showModule("ia");
+  if (command === "estudos") return showModule("estudos");
+  if (command === "projetos") return showModule("projetos");
+  if (command === "agenda") return showModule("agenda");
+  if (command === "financas") return showModule("financas");
+  if (command === "habitos") return showModule("habitos");
+  if (command === "musica") return showModule("musica");
+  if (command === "documentos") return showModule("documentos");
+  if (command === "pesquisa") return showModule("pesquisa");
+  if (command === "missoes") return showModule("missoes");
+  if (command === "sistema") return showModule("sistema");
 
   if (command === "limpar") {
     terminal.innerHTML = "";
@@ -546,63 +757,7 @@ if (commandInput) {
 }
 
 // ======================================================
-// FERRAMENTAS DOS MÓDULOS
-// ======================================================
-
-function setupDynamicTools() {
-  const studyButton = document.querySelector("#studyButton");
-  const studyText = document.querySelector("#studyText");
-  const studyResult = document.querySelector("#studyResult");
-
-  if (studyButton && studyText && studyResult) {
-    studyButton.addEventListener("click", () => {
-      const text = studyText.value.trim();
-
-      if (!text) {
-        studyResult.textContent = "Cole um texto primeiro para organizar.";
-        return;
-      }
-
-      const sentences = text
-        .split(".")
-        .map((item) => item.trim())
-        .filter((item) => item.length > 0)
-        .slice(0, 5);
-
-      studyResult.innerHTML = `
-        <strong>Resumo em tópicos:</strong>
-        <ul>
-          ${sentences.map((sentence) => `<li>${sentence}.</li>`).join("")}
-        </ul>
-      `;
-
-      addTerminalLine("Texto de estudos organizado em tópicos.");
-    });
-  }
-
-  const agendaButton = document.querySelector("#agendaButton");
-  const agendaInput = document.querySelector("#agendaInput");
-  const agendaList = document.querySelector("#agendaList");
-
-  if (agendaButton && agendaInput && agendaList) {
-    agendaButton.addEventListener("click", () => {
-      const item = agendaInput.value.trim();
-
-      if (!item) return;
-
-      const li = document.createElement("li");
-      li.textContent = item;
-      agendaList.appendChild(li);
-
-      agendaInput.value = "";
-
-      addTerminalLine(`Novo lembrete adicionado: ${item}`);
-    });
-  }
-}
-
-// ======================================================
-// PARTÍCULAS / RELÓGIO
+// PARTÍCULAS
 // ======================================================
 
 function createParticles() {
@@ -611,7 +766,7 @@ function createParticles() {
 
   container.innerHTML = "";
 
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 90; i++) {
     const particle = document.createElement("span");
     particle.classList.add("particle");
 
@@ -627,9 +782,11 @@ function createParticles() {
   }
 }
 
-function updateClock() {
-  if (!clock) return;
+// ======================================================
+// RELÓGIO
+// ======================================================
 
+function updateClock() {
   const now = new Date();
 
   const time = now.toLocaleTimeString("pt-BR", {
@@ -638,7 +795,9 @@ function updateClock() {
     second: "2-digit"
   });
 
-  clock.textContent = time;
+  if (clock) {
+    clock.textContent = time;
+  }
 }
 
 // ======================================================
@@ -647,12 +806,9 @@ function updateClock() {
 
 window.addEventListener("load", () => {
   createParticles();
-  createExtraModules();
-  setupDynamicTools();
   updateClock();
   setInterval(updateClock, 1000);
 
-  // Garante que o sistema comece na tela de login
   if (loginScreen && systemScreen) {
     loginScreen.classList.remove("hidden");
     systemScreen.classList.add("hidden");
