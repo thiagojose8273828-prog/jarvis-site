@@ -1,0 +1,251 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(0, 174, 255, 0.25), transparent 35%),
+    linear-gradient(135deg, #020617, #050b1f, #000000);
+  color: #e0f7ff;
+  overflow-x: hidden;
+}
+
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  bottom: -20px;
+  width: 4px;
+  height: 4px;
+  background: #00c8ff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #00c8ff;
+  animation: floatUp linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+.top-bar {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 22px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 200, 255, 0.25);
+  backdrop-filter: blur(12px);
+  background: rgba(2, 6, 23, 0.75);
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #7ddfff;
+  text-shadow: 0 0 18px #00c8ff;
+}
+
+#clock {
+  font-weight: 700;
+  color: #b9f3ff;
+  border: 1px solid rgba(0, 200, 255, 0.4);
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: 0 0 18px rgba(0, 200, 255, 0.25);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 70px 0 40px;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px 25px;
+  border: 1px solid rgba(0, 200, 255, 0.25);
+  border-radius: 28px;
+  background: rgba(2, 8, 23, 0.72);
+  box-shadow:
+    0 0 35px rgba(0, 200, 255, 0.15),
+    inset 0 0 25px rgba(0, 200, 255, 0.08);
+}
+
+.tag {
+  color: #00c8ff;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 7vw, 5.8rem);
+  color: #ffffff;
+  text-shadow:
+    0 0 15px #00c8ff,
+    0 0 35px rgba(0, 200, 255, 0.7);
+  margin-bottom: 18px;
+}
+
+.subtitle {
+  max-width: 760px;
+  margin: 0 auto 28px;
+  color: #c4eaff;
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.status-box {
+  width: fit-content;
+  margin: 0 auto 25px;
+  padding: 12px 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 200, 255, 0.35);
+  background: rgba(0, 28, 55, 0.55);
+}
+
+.status-box span {
+  color: #8fdfff;
+}
+
+#statusText {
+  color: #ffd166;
+}
+
+#statusText.online {
+  color: #00ffcc;
+  text-shadow: 0 0 14px #00ffcc;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #00c8ff, #0066ff);
+  color: #00111f;
+  font-weight: 900;
+  letter-spacing: 1px;
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 40px rgba(0, 200, 255, 0.75);
+}
+
+.terminal-area {
+  margin-top: 35px;
+  padding: 25px;
+  border-radius: 22px;
+  border: 1px solid rgba(0, 200, 255, 0.28);
+  background: rgba(0, 0, 0, 0.68);
+  box-shadow: inset 0 0 30px rgba(0, 200, 255, 0.08);
+}
+
+.terminal-area h2 {
+  color: #7ddfff;
+  margin-bottom: 15px;
+}
+
+#terminal {
+  min-height: 180px;
+  color: #00ffcc;
+  font-family: Consolas, monospace;
+  line-height: 1.8;
+}
+
+.terminal-line::before {
+  content: "> ";
+  color: #00c8ff;
+}
+
+.cards-area {
+  margin-top: 35px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.card {
+  padding: 24px;
+  border-radius: 22px;
+  border: 1px solid rgba(0, 200, 255, 0.25);
+  background: rgba(4, 15, 40, 0.78);
+  box-shadow: 0 0 24px rgba(0, 200, 255, 0.1);
+  transform: translateY(25px);
+  opacity: 0;
+  transition: 0.6s ease;
+}
+
+.card.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.card h3 {
+  color: #7ddfff;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #c4eaff;
+  line-height: 1.6;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 30px;
+  color: #8fdfff;
+  border-top: 1px solid rgba(0, 200, 255, 0.18);
+}
+
+@media (max-width: 800px) {
+  .top-bar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cards-area {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 38px 18px;
+  }
+}
