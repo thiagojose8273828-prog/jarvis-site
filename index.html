@@ -3,23 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>J.A.R.V.I.S | Stark System</title>
+  <title>Indústrias TH | J.A.R.V.I.S</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Fundo animado estilo reator futurista -->
+  <div class="reactor-background">
+    <div class="reactor">
+      <div class="reactor-glow"></div>
+      <div class="reactor-ring ring-1"></div>
+      <div class="reactor-ring ring-2"></div>
+      <div class="reactor-ring ring-3"></div>
+      <div class="reactor-core"></div>
+    </div>
+  </div>
+
+  <!-- Partículas azuis -->
   <div class="particles"></div>
 
+  <!-- Barra superior -->
   <header class="top-bar">
-    <div class="logo">J.A.R.V.I.S</div>
+    <div class="logo">INDÚSTRIAS TH</div>
     <div id="clock">00:00:00</div>
   </header>
 
+  <!-- Conteúdo principal -->
   <main class="container">
     <section class="hero">
       <p class="tag">Sistema Inteligente Stark</p>
+
       <h1>J.A.R.V.I.S Online</h1>
+
       <p class="subtitle">
-        Interface futurista criada para organizar estudos, projetos, tarefas e informações importantes.
+        Interface futurista da Indústrias TH criada para organizar estudos,
+        projetos, tarefas e informações importantes.
       </p>
 
       <div class="status-box">
@@ -30,11 +48,13 @@
       <button id="startButton">Iniciar Sistema</button>
     </section>
 
+    <!-- Terminal -->
     <section class="terminal-area">
       <h2>Terminal</h2>
       <div id="terminal"></div>
     </section>
 
+    <!-- Cards -->
     <section class="cards-area">
       <div class="card">
         <h3>Projetos</h3>
@@ -53,8 +73,9 @@
     </section>
   </main>
 
+  <!-- Rodapé -->
   <footer>
-    <p>Desenvolvido por indústrias TH</p>
+    <p>Indústrias TH — Sistema desenvolvido por sr.stark com J.A.R.V.I.S</p>
   </footer>
 
   <script src="script.js"></script>
