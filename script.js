@@ -1,6 +1,6 @@
 // ===========================================
 // J.A.R.V.I.S CORE — Sistema de Estudos
-// Login + Dashboard + Conteúdos completos
+// Login + Dashboard + Conteúdos + Progresso
 // ===========================================
 
 // LOGIN
@@ -24,8 +24,12 @@ function exitSystem() {
   loginScreen.classList.remove("hidden");
   localStorage.removeItem("jarvis_logged");
 
-  document.getElementById("username").value = "";
-  document.getElementById("password").value = "";
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
+
+  if (usernameInput) usernameInput.value = "";
+  if (passwordInput) passwordInput.value = "";
+
   loginMessage.style.color = "#9acbd7";
   loginMessage.textContent = "Usuário: stark • Senha: 1234";
 }
@@ -715,6 +719,7 @@ Funções:
 - Conteúdos por UC
 - Pesquisa
 - Módulos extras
+- Progresso das UCs
 - Integração futura com IA</code></pre>
 
     <h3>Resumo rápido</h3>
@@ -730,10 +735,88 @@ const modalContent = document.getElementById("modalContent");
 const closeModal = document.getElementById("closeModal");
 const contentButtons = document.querySelectorAll("[data-content]");
 
+// PROGRESSO DAS UCs
+const progressFill = document.getElementById("progressFill");
+const progressText = document.getElementById("progressText");
+const progressDetails = document.getElementById("progressDetails");
+
+const totalUCsProgress = 7;
+
+let completedUCs = JSON.parse(localStorage.getItem("jarvis_completed_ucs")) || [];
+
+function saveProgress() {
+  localStorage.setItem("jarvis_completed_ucs", JSON.stringify(completedUCs));
+}
+
+function updateProgress() {
+  const completedCount = completedUCs.length;
+  const percent = Math.round((completedCount / totalUCsProgress) * 100);
+
+  if (progressFill) {
+    progressFill.style.width = `${percent}%`;
+  }
+
+  if (progressText) {
+    progressText.textContent = `${percent}%`;
+  }
+
+  if (progressDetails) {
+    progressDetails.textContent = `${completedCount} de ${totalUCsProgress} UCs concluídas.`;
+  }
+
+  document.querySelectorAll(".unit-card").forEach(function (card) {
+    const key = card.getAttribute("data-content");
+
+    if (completedUCs.includes(key)) {
+      card.classList.add("completed");
+    } else {
+      card.classList.remove("completed");
+    }
+  });
+}
+
+function completeUC(ucKey) {
+  if (!completedUCs.includes(ucKey)) {
+    completedUCs.push(ucKey);
+    saveProgress();
+    updateProgress();
+  }
+
+  const button = document.querySelector(`[data-complete-uc="${ucKey}"]`);
+
+  if (button) {
+    button.classList.add("done");
+    button.textContent = "UC concluída ✓";
+  }
+}
+
 function openModal(contentKey) {
   if (!contents[contentKey]) return;
 
-  modalContent.innerHTML = contents[contentKey];
+  const isUC = contentKey.startsWith("uc");
+  const completed = isUC && completedUCs.includes(contentKey);
+
+  let completeButton = "";
+
+  if (isUC) {
+    completeButton = `
+      <div class="complete-uc-box">
+        <p>
+          Quando terminar de estudar esta unidade, clique no botão abaixo
+          para atualizar seu progresso.
+        </p>
+
+        <button 
+          class="complete-uc-button ${completed ? "done" : ""}" 
+          data-complete-uc="${contentKey}"
+        >
+          ${completed ? "UC concluída ✓" : "Concluir UC"}
+        </button>
+      </div>
+    `;
+  }
+
+  modalContent.innerHTML = contents[contentKey] + completeButton;
   modal.classList.remove("hidden");
 }
 
@@ -761,6 +844,15 @@ document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     closeContentModal();
   }
+});
+
+modalContent.addEventListener("click", function (event) {
+  const button = event.target.closest("[data-complete-uc]");
+
+  if (!button) return;
+
+  const ucKey = button.getAttribute("data-complete-uc");
+  completeUC(ucKey);
 });
 
 // PESQUISA
@@ -815,4 +907,7 @@ if (totalModules) {
   totalModules.textContent = document.querySelectorAll(".quick-card").length;
 }
 
-console.log("J.A.R.V.I.S CORE carregado com sucesso.");
+// INICIAR PROGRESSO
+updateProgress();
+
+console.log("J.A.R.V.I.S CORE carregado com progresso das UCs.");
