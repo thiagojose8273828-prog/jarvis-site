@@ -10,721 +10,368 @@
 </head>
 <body>
 
-  <div class="background-glow"></div>
+  <!-- FUNDO HUD -->
+  <div class="hud-background"></div>
+  <div class="scan-lines"></div>
 
-  <!-- TOPO DO SITE -->
-  <header class="topbar">
-    <div class="logo">
-      <div class="arc-mini"></div>
+  <!-- LOGIN SCREEN -->
+  <section id="loginScreen" class="login-screen">
 
-      <div>
-        <h1>J.A.R.V.I.S CORE</h1>
-        <p>Portal de Apoio em Tecnologia da Informação</p>
+    <header class="top-hud">
+      <div class="brand">
+        <div class="brand-icon">◢</div>
+        <div>
+          <h1>STARK INDUSTRIES</h1>
+          <p>J.A.R.V.I.S CORE SYSTEM</p>
+        </div>
       </div>
-    </div>
 
-    <nav class="menu">
-      <a href="#inicio">Início</a>
-      <a href="#ucs">Unidades</a>
-      <a href="#extras">Extras</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#conteudos">Conteúdos</a>
-      <a href="#sobre">Sobre</a>
-    </nav>
-  </header>
+      <nav class="top-nav">
+        <span>INÍCIO</span>
+        <span>SUPORTE</span>
+        <span>STATUS</span>
+        <span>BASE DE CONHECIMENTO</span>
+      </nav>
 
-  <main>
+      <div class="system-info">
+        <p>SISTEMA SEGURO</p>
+        <strong id="loginClock">00:00:00</strong>
+      </div>
+    </header>
 
-    <!-- ÁREA INICIAL -->
-    <section id="inicio" class="hero">
-      <div class="hero-text">
-        <span class="status">SISTEMA ONLINE</span>
+    <main class="login-main">
 
-        <p id="greetingText" class="greeting"></p>
+      <div class="login-left">
+        <span class="system-chip">SISTEMA OPERACIONAL ONLINE</span>
 
-        <h2>Central inteligente de apoio para estudantes e desenvolvedores de TI.</h2>
+        <h2>J.A.R.V.I.S CORE</h2>
 
-        <p>
-          O J.A.R.V.I.S CORE é um portal criado para organizar conteúdos, pesquisas,
-          projetos, ferramentas e conhecimentos da área de Tecnologia da Informação.
+        <p class="subtitle">
+          Portal de Apoio em Tecnologia da Informação
         </p>
 
-        <p id="typeText" class="type-text"></p>
+        <div class="mini-status-grid">
+          <div class="mini-status-card">
+            <span>STATUS</span>
+            <strong>ONLINE</strong>
+            <p>100% disponível</p>
+          </div>
 
-        <p id="systemClock" class="clock"></p>
+          <div class="mini-status-card">
+            <span>BASE</span>
+            <strong>TI</strong>
+            <p>Conhecimento carregado</p>
+          </div>
 
-        <div class="hero-buttons">
-          <a href="#ucs" class="btn primary">Acessar Unidades</a>
-          <a href="#conteudos" class="btn secondary">Ver Conteúdos Completos</a>
+          <div class="mini-status-card large">
+            <span>CENTRAL DE AVISOS</span>
+            <p>
+              Sistema J.A.R.V.I.S preparado para suporte em unidades curriculares,
+              projetos, banco de dados, web, IA e automações.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="power-core">
+        <div class="core-ring ring-a"></div>
+        <div class="core-ring ring-b"></div>
+        <div class="core-ring ring-c"></div>
+        <div class="core-center"></div>
+        <p>POWER CORE</p>
+      </div>
+
+      <form id="loginForm" class="login-panel">
+        <div class="panel-title">
+          <span>▣</span>
+          <h3>ACESSO RESTRITO</h3>
         </div>
 
-        <button id="focusModeButton" class="focus-btn">
-          Ativar Modo Foco
+        <label>
+          Usuário
+          <input type="text" id="username" placeholder="Digite o usuário" autocomplete="off" />
+        </label>
+
+        <label>
+          Senha
+          <input type="password" id="password" placeholder="Digite a senha" />
+        </label>
+
+        <div class="login-options">
+          <label class="check-line">
+            <input type="checkbox" />
+            Lembrar-me
+          </label>
+
+          <button type="button" class="ghost-button">Esqueci minha senha</button>
+        </div>
+
+        <button type="submit" class="login-button">
+          Entrar
+          <span>›</span>
         </button>
+
+        <p id="loginMessage" class="login-message"></p>
+
+        <div class="login-hint">
+          <p>Usuário: <strong>stark</strong></p>
+          <p>Senha: <strong>1234</strong></p>
+        </div>
+      </form>
+
+    </main>
+  </section>
+
+  <!-- APP SCREEN -->
+  <section id="appScreen" class="app-screen hidden">
+
+    <!-- HEADER DO PORTAL -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">◢</div>
+        <div>
+          <h1>J.A.R.V.I.S CORE</h1>
+          <p>Portal de Apoio em Tecnologia da Informação</p>
+        </div>
       </div>
 
-      <div class="arc-reactor">
-        <div class="ring ring1"></div>
-        <div class="ring ring2"></div>
-        <div class="core"></div>
+      <nav class="top-nav">
+        <a href="#dashboard">DASHBOARD</a>
+        <a href="#unidades">UNIDADES</a>
+        <a href="#extras">MÓDULOS</a>
+        <a href="#projetos">PROJETOS</a>
+      </nav>
+
+      <div class="user-area">
+        <div>
+          <span>OPERADOR</span>
+          <strong>SR. STARK</strong>
+        </div>
+
+        <button id="logoutButton">Sair</button>
       </div>
-    </section>
-
-    <!-- PESQUISA -->
-    <section class="search-area">
-      <h2>Pesquisar no Portal</h2>
-
-      <p>Digite um tema de TI para encontrar rapidamente no J.A.R.V.I.S.</p>
-
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Pesquisar: banco de dados, algoritmo, IA, GitHub..."
-      />
-
-      <p id="searchResult" class="search-result">
-        Digite um termo para pesquisar no portal.
-      </p>
-
-      <div class="filter-buttons">
-        <button data-filter="all" class="active-filter">Todos</button>
-        <button data-filter="uc">Unidades</button>
-        <button data-filter="extra">Extras</button>
-        <button data-filter="project">Projetos</button>
-      </div>
-    </section>
+    </header>
 
     <!-- DASHBOARD -->
-    <section class="dashboard">
-      <div class="dash-card">
-        <h3 id="totalUCs">0</h3>
-        <p>Unidades Curriculares</p>
-      </div>
+    <main class="app-main">
 
-      <div class="dash-card">
-        <h3 id="totalExtras">0</h3>
-        <p>Áreas Extras</p>
-      </div>
+      <section id="dashboard" class="dashboard-hero">
+        <div class="dashboard-text">
+          <span class="system-chip">CENTRAL DE COMANDO ATIVA</span>
 
-      <div class="dash-card">
-        <h3 id="totalProjects">0</h3>
-        <p>Projetos Práticos</p>
-      </div>
+          <h2>Base de conhecimento em TI inicializada.</h2>
 
-      <div class="dash-card">
-        <h3 id="jarvisStatus">Sistema online</h3>
-        <p>Status do Sistema</p>
-      </div>
-    </section>
-
-    <!-- BOOT LOG -->
-    <section class="boot-panel">
-      <h2>J.A.R.V.I.S Boot Log</h2>
-      <div id="bootLog"></div>
-    </section>
-
-    <!-- UNIDADES CURRICULARES -->
-    <section id="ucs" class="section">
-      <div class="section-title">
-        <h2>Unidades Curriculares</h2>
-        <p>Base principal do portal de apoio em Tecnologia da Informação.</p>
-      </div>
-
-      <div class="cards-grid">
-
-        <article class="card searchable" data-category="uc">
-          <span>UC1</span>
-          <h3>Requisitos e Funcionalidades</h3>
           <p>
-            Entenda requisitos funcionais, não funcionais, histórias de usuário,
-            regras de negócio e documentação de sistemas.
+            Cada unidade foi separada em módulos interativos para facilitar o acesso,
+            estudo, revisão e apoio para alunos da sala ou pessoas externas.
           </p>
-          <button class="open-content" data-target="uc1-content">Ver conteúdo completo</button>
-        </article>
 
-        <article class="card searchable" data-category="uc">
-          <span>UC2</span>
-          <h3>Gestão de Projetos de TI</h3>
+          <div class="search-box">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Pesquisar: banco de dados, algoritmos, GitHub, IA..."
+            />
+            <span id="searchStatus">Digite algo para pesquisar no portal.</span>
+          </div>
+        </div>
+
+        <div class="system-dashboard">
+          <div class="stat-card">
+            <span>UNIDADES</span>
+            <strong id="totalUnits">7</strong>
+          </div>
+
+          <div class="stat-card">
+            <span>MÓDULOS</span>
+            <strong id="totalModules">4</strong>
+          </div>
+
+          <div class="stat-card">
+            <span>STATUS</span>
+            <strong>ONLINE</strong>
+          </div>
+
+          <div class="stat-card">
+            <span>HORÁRIO</span>
+            <strong id="appClock">00:00</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- UNIDADES -->
+      <section id="unidades" class="section-block">
+        <div class="section-title">
+          <span>BASE DE CONHECIMENTO</span>
+          <h2>Unidades Curriculares</h2>
           <p>
-            Aprenda Scrum, Kanban, Cascata, backlog, sprint, priorização,
-            cronograma, riscos e organização de projetos.
-          </p>
-          <button class="open-content" data-target="uc2-content">Ver conteúdo completo</button>
-        </article>
-
-        <article class="card searchable" data-category="uc">
-          <span>UC3</span>
-          <h3>Algoritmos</h3>
-          <p>
-            Aprenda lógica de programação, variáveis, condições, repetições,
-            funções, vetores, matrizes e fluxogramas.
-          </p>
-          <button class="open-content" data-target="uc3-content">Ver conteúdo completo</button>
-        </article>
-
-        <article class="card searchable" data-category="uc">
-          <span>UC4</span>
-          <h3>Programação Estruturada e POO</h3>
-          <p>
-            Entenda programação estruturada, classes, objetos, atributos,
-            métodos, herança, encapsulamento e polimorfismo.
-          </p>
-          <button class="open-content" data-target="uc4-content">Ver conteúdo completo</button>
-        </article>
-
-        <article class="card searchable" data-category="uc">
-          <span>UC5</span>
-          <h3>Aplicações Desktop</h3>
-          <p>
-            Conheça sistemas desktop, telas, cadastros, consultas, CRUD,
-            relatórios e conexão com banco de dados.
-          </p>
-          <button class="open-content" data-target="uc5-content">Ver conteúdo completo</button>
-        </article>
-
-        <article class="card searchable" data-category="uc">
-          <span>UC6</span>
-          <h3>Banco de Dados</h3>
-          <p>
-            Aprenda SQL, tabelas, registros, chave primária, chave estrangeira,
-            relacionamentos, DER, backup e segurança.
-          </p>
-          <button class="open-content" data-target="uc6-content">Ver conteúdo completo</button>
-        </article>
-
-        <article class="card searchable" data-category="uc">
-          <span>UC7</span>
-          <h3>Aplicações Web</h3>
-          <p>
-            Aprenda HTML, CSS, JavaScript, front-end, back-end, APIs,
-            login, dashboards, responsividade e deploy.
-          </p>
-          <button class="open-content" data-target="uc7-content">Ver conteúdo completo</button>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ÁREAS EXTRAS -->
-    <section id="extras" class="section">
-      <div class="section-title">
-        <h2>Áreas Extras de TI</h2>
-        <p>Conteúdos complementares para ampliar o conhecimento técnico.</p>
-      </div>
-
-      <div class="cards-grid">
-
-        <article class="card extra searchable" data-category="extra">
-          <span>IA</span>
-          <h3>Inteligência Artificial</h3>
-          <p>
-            GPT, Gemini, Copilot, prompts, agentes de IA, APIs e automações inteligentes.
-          </p>
-        </article>
-
-        <article class="card extra searchable" data-category="extra">
-          <span>N8N</span>
-          <h3>Automações</h3>
-          <p>
-            Fluxos automáticos, webhooks, integração com IA, bots, Gmail, APIs e banco de dados.
-          </p>
-        </article>
-
-        <article class="card extra searchable" data-category="extra">
-          <span>GIT</span>
-          <h3>Git e GitHub</h3>
-          <p>
-            Repositórios, commits, branches, GitHub Pages, versionamento e portfólio.
-          </p>
-        </article>
-
-        <article class="card extra searchable" data-category="extra">
-          <span>SEC</span>
-          <h3>Segurança da Informação</h3>
-          <p>
-            Senhas seguras, phishing, backup, privacidade, autenticação e boas práticas.
-          </p>
-        </article>
-
-        <article class="card extra searchable" data-category="extra">
-          <span>WEB</span>
-          <h3>Desenvolvimento Web Avançado</h3>
-          <p>
-            Layouts modernos, responsividade, animações, dashboards, landing pages e interfaces profissionais.
-          </p>
-        </article>
-
-        <article class="card extra searchable" data-category="extra">
-          <span>JOB</span>
-          <h3>Carreira em TI</h3>
-          <p>
-            Áreas da TI, estágio, currículo, portfólio, front-end, back-end, full stack e mercado.
-          </p>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- PROJETOS PRÁTICOS -->
-    <section id="projetos" class="section">
-      <div class="section-title">
-        <h2>Projetos Práticos</h2>
-        <p>Ideias de projetos para treinar e evoluir na área de TI.</p>
-      </div>
-
-      <div class="project-list">
-
-        <div class="project-item searchable" data-category="project">
-          <h3>Sistema de Login</h3>
-          <p>
-            Projeto com tela de login, validação de usuário e proteção de área interna.
+            Cada unidade possui explicação detalhada, exemplo prático, erro comum e resumo rápido.
           </p>
         </div>
 
-        <div class="project-item searchable" data-category="project">
-          <h3>Dashboard de Tarefas</h3>
+        <div class="unit-grid">
+
+          <button class="unit-card searchable" data-keywords="uc1 requisitos funcionalidades levantamento análise software cliente documentação" data-content="uc1">
+            <div class="unit-icon">▤</div>
+            <div>
+              <span>UC1</span>
+              <h3>Requisitos</h3>
+              <p>Levantamento e análise de requisitos de software.</p>
+            </div>
+            <strong>›</strong>
+          </button>
+
+          <button class="unit-card searchable" data-keywords="uc2 gestão projetos scrum kanban cascata backlog sprint equipe ti" data-content="uc2">
+            <div class="unit-icon">▦</div>
+            <div>
+              <span>UC2</span>
+              <h3>Gestão de Projetos</h3>
+              <p>Planejamento, execução e controle de projetos.</p>
+            </div>
+            <strong>›</strong>
+          </button>
+
+          <button class="unit-card searchable" data-keywords="uc3 algoritmos lógica programação variáveis if else for while fluxograma" data-content="uc3">
+            <div class="unit-icon">⌘</div>
+            <div>
+              <span>UC3</span>
+              <h3>Algoritmos</h3>
+              <p>Lógica de programação e estruturas básicas.</p>
+            </div>
+            <strong>›</strong>
+          </button>
+
+          <button class="unit-card searchable" data-keywords="uc4 programação estruturada poo objetos classes métodos herança encapsulamento" data-content="uc4">
+            <div class="unit-icon">&lt;/&gt;</div>
+            <div>
+              <span>UC4</span>
+              <h3>Programação</h3>
+              <p>Estruturada e orientada a objetos.</p>
+            </div>
+            <strong>›</strong>
+          </button>
+
+          <button class="unit-card searchable" data-keywords="uc5 desktop aplicações crud telas login cadastro consulta relatório" data-content="uc5">
+            <div class="unit-icon">▣</div>
+            <div>
+              <span>UC5</span>
+              <h3>Desktop</h3>
+              <p>Sistemas instaláveis, CRUD e interfaces.</p>
+            </div>
+            <strong>›</strong>
+          </button>
+
+          <button class="unit-card searchable" data-keywords="uc6 banco dados sql tabela chave primária estrangeira der select insert update delete" data-content="uc6">
+            <div class="unit-icon">◉</div>
+            <div>
+              <span>UC6</span>
+              <h3>Banco de Dados</h3>
+              <p>Modelagem, SQL e administração de dados.</p>
+            </div>
+            <strong>›</strong>
+          </button>
+
+          <button class="unit-card searchable" data-keywords="uc7 web html css javascript front end back end api github pages deploy" data-content="uc7">
+            <div class="unit-icon">◎</div>
+            <div>
+              <span>UC7</span>
+              <h3>Web</h3>
+              <p>Desenvolvimento web e tecnologias modernas.</p>
+            </div>
+            <strong>›</strong>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- MÓDULOS EXTRAS -->
+      <section id="extras" class="section-block">
+        <div class="section-title">
+          <span>MÓDULOS EXTRAS</span>
+          <h2>Áreas de Apoio</h2>
           <p>
-            Painel para organizar tarefas no estilo Kanban.
+            Conteúdos complementares para fortalecer o aprendizado e o portfólio.
           </p>
         </div>
 
-        <div class="project-item searchable" data-category="project">
-          <h3>Sistema CRUD</h3>
-          <p>
-            Cadastro, consulta, edição e exclusão de registros.
-          </p>
+        <div class="quick-grid">
+
+          <button class="quick-card searchable" data-keywords="ia inteligência artificial gpt gemini prompt agentes api" data-content="ia">
+            <span>IA</span>
+            <h3>Assistente Inteligente</h3>
+            <p>Prompts, agentes, GPT, Gemini e APIs.</p>
+          </button>
+
+          <button class="quick-card searchable" data-keywords="github git repositório commit branch pages portfólio" data-content="github">
+            <span>GitHub</span>
+            <h3>Repositórios e Código</h3>
+            <p>Versionamento, deploy e portfólio.</p>
+          </button>
+
+          <button class="quick-card searchable" data-keywords="automação n8n webhook api fluxo bot integração" data-content="automacoes">
+            <span>Auto</span>
+            <h3>Automações</h3>
+            <p>Scripts, fluxos, APIs e n8n.</p>
+          </button>
+
+          <button class="quick-card searchable" data-keywords="projetos prática portfólio login crud dashboard sistema" data-content="projetos">
+            <span>Projetos</span>
+            <h3>Portfólio e Entregas</h3>
+            <p>Ideias práticas para treinar TI.</p>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- PROJETOS -->
+      <section id="projetos" class="section-block">
+        <div class="section-title">
+          <span>MISSÕES PRÁTICAS</span>
+          <h2>Projetos recomendados</h2>
         </div>
 
-        <div class="project-item searchable" data-category="project">
-          <h3>Chat com IA</h3>
-          <p>
-            Área para conectar Gemini, GPT ou outra IA via API.
-          </p>
+        <div class="mission-list">
+          <div class="mission-card">
+            <h3>Sistema de Login</h3>
+            <p>Praticar HTML, CSS, JavaScript e validação de dados.</p>
+          </div>
+
+          <div class="mission-card">
+            <h3>Dashboard Kanban</h3>
+            <p>Organizar tarefas em colunas: A Fazer, Em Andamento e Concluído.</p>
+          </div>
+
+          <div class="mission-card">
+            <h3>Sistema CRUD</h3>
+            <p>Criar, consultar, editar e excluir registros.</p>
+          </div>
+
+          <div class="mission-card">
+            <h3>Banco SQL</h3>
+            <p>Modelar tabelas, relacionamentos e consultas.</p>
+          </div>
         </div>
-
-        <div class="project-item searchable" data-category="project">
-          <h3>Banco de Dados SQL</h3>
-          <p>
-            Projeto com tabelas, relacionamentos e comandos SQL.
-          </p>
-        </div>
-
-        <div class="project-item searchable" data-category="project">
-          <h3>Portfólio Profissional</h3>
-          <p>
-            Site pessoal para apresentar projetos, habilidades, contatos e evolução na área de TI.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CONTEÚDOS COMPLETOS -->
-    <section id="conteudos" class="section">
-      <div class="section-title">
-        <h2>Conteúdos Completos</h2>
-        <p>
-          Aqui ficam as explicações detalhadas, com exemplos e aplicações práticas.
-        </p>
-      </div>
-
-      <!-- UC1 -->
-      <article id="uc1-content" class="content-panel">
-        <h2>UC1 — Requisitos e Funcionalidades</h2>
-
-        <h3>O que são requisitos?</h3>
-        <p>
-          Requisitos são as necessidades que um sistema precisa atender. Eles mostram
-          o que o sistema deve fazer, quais regras deve seguir e quais características
-          precisa ter para funcionar corretamente.
-        </p>
-
-        <h3>Para que serve?</h3>
-        <p>
-          Serve para entender o problema antes de criar o sistema. Sem requisitos claros,
-          a equipe pode desenvolver algo errado, incompleto ou diferente do que o cliente precisa.
-        </p>
-
-        <h3>Exemplo prático</h3>
-        <p>
-          Em um sistema de login, um requisito pode ser: “O usuário deve informar e-mail e senha para acessar o sistema”.
-        </p>
-
-        <h3>Tipos de requisitos</h3>
-        <ul>
-          <li><strong>Funcionais:</strong> dizem o que o sistema deve fazer.</li>
-          <li><strong>Não funcionais:</strong> dizem como o sistema deve funcionar.</li>
-        </ul>
-
-        <h3>Exemplo de requisito funcional</h3>
-        <pre><code>O sistema deve permitir que o usuário faça login usando e-mail e senha.</code></pre>
-
-        <h3>Exemplo de requisito não funcional</h3>
-        <pre><code>O sistema deve carregar a tela inicial em até 3 segundos.</code></pre>
-
-        <h3>Erro comum</h3>
-        <p>
-          Um erro comum é começar a programar sem entender exatamente o que precisa ser feito.
-        </p>
-
-        <h3>Resumo rápido</h3>
-        <p>
-          Requisitos são a base de qualquer sistema. Eles ajudam a transformar uma ideia em um projeto organizado.
-        </p>
-      </article>
-
-      <!-- UC2 -->
-      <article id="uc2-content" class="content-panel">
-        <h2>UC2 — Gestão de Projetos de TI</h2>
-
-        <h3>O que é gestão de projetos?</h3>
-        <p>
-          Gestão de projetos é a organização das etapas, tarefas, pessoas, prazos e recursos
-          necessários para entregar um projeto com qualidade.
-        </p>
-
-        <h3>Para que serve?</h3>
-        <p>
-          Serve para evitar bagunça, atrasos, retrabalho e falta de comunicação dentro da equipe.
-        </p>
-
-        <h3>Exemplo prático</h3>
-        <p>
-          Se uma equipe precisa criar um site, ela pode dividir o projeto em tarefas:
-          criar layout, fazer HTML, fazer CSS, programar JavaScript, testar e publicar.
-        </p>
-
-        <h3>Scrum</h3>
-        <p>
-          Scrum é uma metodologia ágil usada para organizar o trabalho em ciclos chamados
-          sprints. Cada sprint tem um objetivo e uma entrega.
-        </p>
-
-        <h3>Kanban</h3>
-        <p>
-          Kanban é um quadro visual usado para acompanhar tarefas. Normalmente ele é dividido em:
-        </p>
-
-        <pre><code>A Fazer | Em Andamento | Concluído</code></pre>
-
-        <h3>Exemplo de backlog</h3>
-        <pre><code>1. Criar tela inicial
-2. Criar tela de login
-3. Criar dashboard
-4. Criar área de pesquisa
-5. Publicar no GitHub Pages</code></pre>
-
-        <h3>Erro comum</h3>
-        <p>
-          Um erro comum é tentar fazer tudo ao mesmo tempo, sem prioridade.
-        </p>
-
-        <h3>Resumo rápido</h3>
-        <p>
-          Gestão de projetos ajuda a equipe a trabalhar de forma organizada, com foco, prioridade e entregas claras.
-        </p>
-      </article>
-
-      <!-- UC3 -->
-      <article id="uc3-content" class="content-panel">
-        <h2>UC3 — Algoritmos</h2>
-
-        <h3>O que é algoritmo?</h3>
-        <p>
-          Algoritmo é uma sequência de passos usada para resolver um problema.
-          Ele pode ser escrito em linguagem simples, fluxograma, pseudocódigo ou código.
-        </p>
-
-        <h3>Para que serve?</h3>
-        <p>
-          Serve para organizar o raciocínio antes de programar.
-        </p>
-
-        <h3>Exemplo do dia a dia</h3>
-        <pre><code>1. Pegar um copo
-2. Colocar água
-3. Beber a água</code></pre>
-
-        <h3>Exemplo em JavaScript</h3>
-        <pre><code>let senha = "1234";
-
-if (senha === "1234") {
-  console.log("Acesso liberado");
-} else {
-  console.log("Senha incorreta");
-}</code></pre>
-
-        <h3>Explicação do código</h3>
-        <ul>
-          <li><strong>let senha</strong> cria uma variável.</li>
-          <li><strong>if</strong> verifica uma condição.</li>
-          <li><strong>else</strong> executa outra ação se a condição for falsa.</li>
-        </ul>
-
-        <h3>Erro comum</h3>
-        <p>
-          Confundir <strong>=</strong> com <strong>===</strong>.
-        </p>
-
-        <pre><code>// Errado para comparação
-if (senha = "1234") {
-  console.log("Acesso liberado");
-}
-
-// Correto
-if (senha === "1234") {
-  console.log("Acesso liberado");
-}</code></pre>
-
-        <h3>Resumo rápido</h3>
-        <p>
-          Algoritmo é o passo a passo lógico para resolver um problema.
-        </p>
-      </article>
-
-      <!-- UC4 -->
-      <article id="uc4-content" class="content-panel">
-        <h2>UC4 — Programação Estruturada e Orientada a Objetos</h2>
-
-        <h3>Programação estruturada</h3>
-        <p>
-          É um modelo de programação baseado em sequência, decisão e repetição.
-          O código é organizado em blocos e funções.
-        </p>
-
-        <h3>Programação orientada a objetos</h3>
-        <p>
-          É um modelo de programação baseado em objetos. Cada objeto possui
-          características e ações.
-        </p>
-
-        <h3>Exemplo prático</h3>
-        <p>
-          Imagine um carro. Ele pode ter atributos como cor, modelo e velocidade.
-          Também pode ter métodos como acelerar e frear.
-        </p>
-
-        <h3>Exemplo em JavaScript</h3>
-        <pre><code>class Carro {
-  constructor(modelo, cor) {
-    this.modelo = modelo;
-    this.cor = cor;
-  }
-
-  acelerar() {
-    console.log("O carro está acelerando");
-  }
-}
-
-const meuCarro = new Carro("Mustang", "azul");
-meuCarro.acelerar();</code></pre>
-
-        <h3>Conceitos importantes</h3>
-        <ul>
-          <li><strong>Classe:</strong> modelo para criar objetos.</li>
-          <li><strong>Objeto:</strong> elemento criado a partir de uma classe.</li>
-          <li><strong>Atributo:</strong> característica do objeto.</li>
-          <li><strong>Método:</strong> ação que o objeto pode realizar.</li>
-        </ul>
-
-        <h3>Erro comum</h3>
-        <p>
-          Um erro comum é criar classes sem entender qual responsabilidade cada uma deve ter.
-        </p>
-
-        <h3>Resumo rápido</h3>
-        <p>
-          Programação estruturada organiza o código em passos. POO organiza o código em objetos.
-        </p>
-      </article>
-
-      <!-- UC5 -->
-      <article id="uc5-content" class="content-panel">
-        <h2>UC5 — Aplicações Desktop</h2>
-
-        <h3>O que é uma aplicação desktop?</h3>
-        <p>
-          Aplicação desktop é um programa instalado ou executado em um computador,
-          como sistemas de estoque, cadastro, vendas ou controle interno.
-        </p>
-
-        <h3>Para que serve?</h3>
-        <p>
-          Serve para resolver problemas específicos dentro de empresas, escolas,
-          lojas ou ambientes administrativos.
-        </p>
-
-        <h3>Exemplo prático</h3>
-        <p>
-          Um sistema de estoque pode ter tela de login, cadastro de produtos,
-          consulta de produtos, edição, exclusão e geração de relatórios.
-        </p>
-
-        <h3>Estrutura comum</h3>
-        <pre><code>Login
-Dashboard
-Cadastro
-Consulta
-Edição
-Exclusão
-Relatórios</code></pre>
-
-        <h3>CRUD</h3>
-        <p>
-          CRUD significa:
-        </p>
-
-        <ul>
-          <li><strong>Create:</strong> criar/cadastrar.</li>
-          <li><strong>Read:</strong> ler/consultar.</li>
-          <li><strong>Update:</strong> atualizar/editar.</li>
-          <li><strong>Delete:</strong> excluir.</li>
-        </ul>
-
-        <h3>Erro comum</h3>
-        <p>
-          Um erro comum é criar telas bonitas, mas sem validação dos dados.
-        </p>
-
-        <h3>Resumo rápido</h3>
-        <p>
-          Aplicações desktop são sistemas feitos para rodar no computador e ajudar em processos internos.
-        </p>
-      </article>
-
-      <!-- UC6 -->
-      <article id="uc6-content" class="content-panel">
-        <h2>UC6 — Banco de Dados</h2>
-
-        <h3>O que é banco de dados?</h3>
-        <p>
-          Banco de dados é um sistema usado para armazenar informações de forma organizada.
-          Ele guarda dados em tabelas, campos e registros.
-        </p>
-
-        <h3>Para que serve?</h3>
-        <p>
-          Serve para armazenar informações que um sistema precisa usar, como usuários,
-          produtos, pedidos, mensagens, notas, vagas ou clientes.
-        </p>
-
-        <h3>Exemplo de tabela</h3>
-        <pre><code>Tabela: alunos
-
-id | nome   | email             | curso
-1  | Carlos | carlos@email.com  | TI
-2  | Ana    | ana@email.com     | Web</code></pre>
-
-        <h3>Criando uma tabela em SQL</h3>
-        <pre><code>CREATE TABLE alunos (
-  id INT PRIMARY KEY,
-  nome VARCHAR(100),
-  email VARCHAR(100),
-  curso VARCHAR(100)
-);</code></pre>
-
-        <h3>Inserindo dados</h3>
-        <pre><code>INSERT INTO alunos (id, nome, email, curso)
-VALUES (1, 'Carlos', 'carlos@email.com', 'TI');</code></pre>
-
-        <h3>Consultando dados</h3>
-        <pre><code>SELECT * FROM alunos;</code></pre>
-
-        <h3>Atualizando dados</h3>
-        <pre><code>UPDATE alunos
-SET curso = 'Desenvolvimento Web'
-WHERE id = 1;</code></pre>
-
-        <h3>Excluindo dados</h3>
-        <pre><code>DELETE FROM alunos
-WHERE id = 1;</code></pre>
-
-        <h3>Erro comum</h3>
-        <p>
-          Um erro comum é esquecer o <strong>WHERE</strong> no UPDATE ou DELETE.
-          Isso pode alterar ou apagar todos os registros da tabela.
-        </p>
-
-        <h3>Resumo rápido</h3>
-        <p>
-          Banco de dados é a parte do sistema que guarda informações importantes de forma organizada.
-        </p>
-      </article>
-
-      <!-- UC7 -->
-      <article id="uc7-content" class="content-panel">
-        <h2>UC7 — Aplicações Web</h2>
-
-        <h3>O que é aplicação web?</h3>
-        <p>
-          Aplicação web é um sistema acessado pelo navegador, como sites, dashboards,
-          sistemas de login, lojas virtuais e plataformas online.
-        </p>
-
-        <h3>Para que serve?</h3>
-        <p>
-          Serve para permitir que pessoas acessem um sistema pela internet ou rede,
-          usando computador, celular ou tablet.
-        </p>
-
-        <h3>Tecnologias principais</h3>
-        <ul>
-          <li><strong>HTML:</strong> estrutura da página.</li>
-          <li><strong>CSS:</strong> aparência e design.</li>
-          <li><strong>JavaScript:</strong> interatividade e lógica.</li>
-        </ul>
-
-        <h3>Exemplo de HTML</h3>
-        <pre><code>&lt;h1&gt;Meu primeiro site&lt;/h1&gt;
-&lt;p&gt;Bem-vindo ao portal de TI.&lt;/p&gt;</code></pre>
-
-        <h3>Exemplo de CSS</h3>
-        <pre><code>body {
-  background: #020b18;
-  color: white;
-}</code></pre>
-
-        <h3>Exemplo de JavaScript</h3>
-        <pre><code>const nome = "J.A.R.V.I.S";
-console.log("Sistema " + nome + " iniciado.");</code></pre>
-
-        <h3>Erro comum</h3>
-        <p>
-          Um erro comum é esquecer de ligar o CSS ou o JavaScript no HTML.
-        </p>
-
-        <pre><code>&lt;link rel="stylesheet" href="style.css" /&gt;
-&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
-
-        <h3>Resumo rápido</h3>
-        <p>
-          Aplicações web são sistemas acessados pelo navegador e construídos com tecnologias como HTML, CSS e JavaScript.
-        </p>
-      </article>
-
-    </section>
-
-    <!-- SOBRE -->
-    <section id="sobre" class="section about">
-      <h2>Sobre o J.A.R.V.I.S CORE</h2>
-
-      <p>
-        O J.A.R.V.I.S CORE é um portal de apoio em Tecnologia da Informação,
-        criado para reunir conteúdos, projetos, pesquisas e ferramentas úteis para estudantes,
-        turmas e pessoas interessadas em TI.
-      </p>
-
-      <p>
-        A proposta é transformar conhecimento técnico em algo acessível, organizado e fácil de consultar.
-      </p>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>J.A.R.V.I.S CORE — Stark Technology Support</p>
-    <p>Portal de Apoio em Tecnologia da Informação</p>
-  </footer>
+      </section>
+
+    </main>
+
+    <footer class="app-footer">
+      <span>STARK OS v3.0</span>
+      <span>CPU 12%</span>
+      <span>MEMÓRIA 34%</span>
+      <span>REDE 1.2Gbps</span>
+      <span>BACKUP ATIVO</span>
+    </footer>
+  </section>
+
+  <!-- MODAL DE CONTEÚDO -->
+  <div id="contentModal" class="modal hidden">
+    <div class="modal-box">
+      <button id="closeModal" class="close-modal">×</button>
+
+      <div id="modalContent"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
