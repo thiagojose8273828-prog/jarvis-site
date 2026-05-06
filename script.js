@@ -2,6 +2,7 @@
 // J.A.R.V.I.S CORE — Indústrias TH
 // Sistema de Estudos Inteligente
 // Login + Dashboard + Conteúdos + Modal + Progresso das UCs
+// Links externos com páginas, imagens e vídeos
 // =======================================================
 
 // =======================================================
@@ -831,6 +832,7 @@ Funções:
 - Pesquisa
 - Módulos extras
 - Progresso das UCs
+- Links para páginas, imagens e vídeos
 - Integração futura com IA</code></pre>
 
     <h3>Resumo rápido</h3>
@@ -897,7 +899,66 @@ function resetProgress() {
 }
 
 // =======================================================
-// 7. MODAL
+// 7. MATERIAL COMPLETO
+// =======================================================
+
+const resourceTitles = {
+  uc1: "requisitos de software",
+  uc2: "gestão de projetos scrum kanban",
+  uc3: "algoritmos lógica de programação",
+  uc4: "programação orientada a objetos",
+  uc5: "sistemas desktop CRUD",
+  uc6: "banco de dados SQL modelagem",
+  uc7: "desenvolvimento web HTML CSS JavaScript",
+  ia: "inteligência artificial exemplos práticos",
+  github: "GitHub repositórios commits GitHub Pages",
+  automacoes: "automação n8n APIs webhooks",
+  projetos: "projetos de programação para portfólio"
+};
+
+function createResourceBox(contentKey) {
+  const searchTerm = encodeURIComponent(resourceTitles[contentKey] || "tecnologia estudos");
+
+  return `
+    <div class="resource-box">
+      <h3>Material completo para estudar mais</h3>
+
+      <p>
+        Acesse uma página detalhada com explicações, exemplos, imagens e vídeos
+        relacionados a este conteúdo.
+      </p>
+
+      <div class="resource-links">
+        <a
+          href="https://www.google.com/search?q=${searchTerm}+explica%C3%A7%C3%A3o+completa+com+exemplos"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Página detalhada
+        </a>
+
+        <a
+          href="https://www.google.com/search?tbm=isch&q=${searchTerm}+diagramas+exemplos"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Imagens
+        </a>
+
+        <a
+          href="https://www.youtube.com/results?search_query=${searchTerm}+aula+completa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Vídeos
+        </a>
+      </div>
+    </div>
+  `;
+}
+
+// =======================================================
+// 8. MODAL
 // =======================================================
 
 function openModal(contentKey) {
@@ -916,9 +977,9 @@ function openModal(contentKey) {
           para atualizar seu progresso.
         </p>
 
-        <button 
+        <button
           type="button"
-          class="complete-uc-button ${completed ? "done" : ""}" 
+          class="complete-uc-button ${completed ? "done" : ""}"
           data-complete-uc="${contentKey}"
         >
           ${completed ? "UC concluída ✓" : "Concluir UC"}
@@ -927,7 +988,9 @@ function openModal(contentKey) {
     `;
   }
 
-  modalContent.innerHTML = contents[contentKey] + completeButton;
+  const resourceBox = createResourceBox(contentKey);
+
+  modalContent.innerHTML = contents[contentKey] + completeButton + resourceBox;
   modal.classList.remove("hidden");
 }
 
@@ -975,7 +1038,7 @@ if (modalContent) {
 }
 
 // =======================================================
-// 8. PESQUISA
+// 9. PESQUISA
 // =======================================================
 
 function normalizeText(text) {
@@ -1018,7 +1081,7 @@ if (searchInput) {
 }
 
 // =======================================================
-// 9. CONTADORES
+// 10. CONTADORES
 // =======================================================
 
 if (totalUnits) {
@@ -1030,7 +1093,7 @@ if (totalModules) {
 }
 
 // =======================================================
-// 10. INICIALIZAÇÃO
+// 11. INICIALIZAÇÃO
 // =======================================================
 
 updateProgress();
