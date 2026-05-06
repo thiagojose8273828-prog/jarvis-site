@@ -1,27 +1,70 @@
-// ===========================================
-// J.A.R.V.I.S CORE — Sistema de Estudos
-// Login + Dashboard + Conteúdos + Progresso
-// ===========================================
+// =======================================================
+// J.A.R.V.I.S CORE — Indústrias TH
+// Sistema de Estudos Inteligente
+// Login + Dashboard + Conteúdos + Modal + Progresso das UCs
+// =======================================================
 
-// LOGIN
+// =======================================================
+// 1. ELEMENTOS PRINCIPAIS
+// =======================================================
+
 const loginScreen = document.getElementById("loginScreen");
 const appScreen = document.getElementById("appScreen");
 const loginForm = document.getElementById("loginForm");
 const loginMessage = document.getElementById("loginMessage");
 const logoutButton = document.getElementById("logoutButton");
 
+const loginClock = document.getElementById("loginClock");
+const appClock = document.getElementById("appClock");
+
+const modal = document.getElementById("contentModal");
+const modalContent = document.getElementById("modalContent");
+const closeModal = document.getElementById("closeModal");
+const contentButtons = document.querySelectorAll("[data-content]");
+
+const searchInput = document.getElementById("searchInput");
+const searchableItems = document.querySelectorAll(".searchable");
+const searchStatus = document.getElementById("searchStatus");
+
+const totalUnits = document.getElementById("totalUnits");
+const totalModules = document.getElementById("totalModules");
+
+const progressFill = document.getElementById("progressFill");
+const progressText = document.getElementById("progressText");
+const progressDetails = document.getElementById("progressDetails");
+
+// =======================================================
+// 2. CONFIGURAÇÕES DO SISTEMA
+// =======================================================
+
 const validUser = "stark";
 const validPassword = "1234";
 
+const totalUCsProgress = 7;
+
+let completedUCs = JSON.parse(localStorage.getItem("jarvis_completed_ucs")) || [];
+
+// =======================================================
+// 3. LOGIN
+// =======================================================
+
 function enterSystem() {
+  if (!loginScreen || !appScreen) return;
+
   loginScreen.classList.add("hidden");
   appScreen.classList.remove("hidden");
+
   localStorage.setItem("jarvis_logged", "true");
+
+  updateProgress();
 }
 
 function exitSystem() {
+  if (!loginScreen || !appScreen) return;
+
   appScreen.classList.add("hidden");
   loginScreen.classList.remove("hidden");
+
   localStorage.removeItem("jarvis_logged");
 
   const usernameInput = document.getElementById("username");
@@ -30,36 +73,54 @@ function exitSystem() {
   if (usernameInput) usernameInput.value = "";
   if (passwordInput) passwordInput.value = "";
 
-  loginMessage.style.color = "#9acbd7";
-  loginMessage.textContent = "Usuário: stark • Senha: 1234";
+  if (loginMessage) {
+    loginMessage.style.color = "#9acbd7";
+    loginMessage.textContent = "Usuário: stark • Senha: 1234";
+  }
 }
 
 if (localStorage.getItem("jarvis_logged") === "true") {
   enterSystem();
 }
 
-loginForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+if (loginForm) {
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  const username = document.getElementById("username").value.trim().toLowerCase();
-  const password = document.getElementById("password").value.trim();
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
 
-  if (username === validUser && password === validPassword) {
-    loginMessage.style.color = "#00eaff";
-    loginMessage.textContent = "Acesso autorizado. Inicializando J.A.R.V.I.S...";
+    if (!usernameInput || !passwordInput) return;
 
-    setTimeout(function () {
-      enterSystem();
-    }, 700);
-  } else {
-    loginMessage.style.color = "#ff5f7e";
-    loginMessage.textContent = "Acesso negado. Usuário ou senha incorretos.";
-  }
-});
+    const username = usernameInput.value.trim().toLowerCase();
+    const password = passwordInput.value.trim();
 
-logoutButton.addEventListener("click", exitSystem);
+    if (username === validUser && password === validPassword) {
+      if (loginMessage) {
+        loginMessage.style.color = "#00eaff";
+        loginMessage.textContent = "Acesso autorizado. Inicializando J.A.R.V.I.S...";
+      }
 
-// RELÓGIOS
+      setTimeout(function () {
+        enterSystem();
+      }, 700);
+    } else {
+      if (loginMessage) {
+        loginMessage.style.color = "#ff5f7e";
+        loginMessage.textContent = "Acesso negado. Usuário ou senha incorretos.";
+      }
+    }
+  });
+}
+
+if (logoutButton) {
+  logoutButton.addEventListener("click", exitSystem);
+}
+
+// =======================================================
+// 4. RELÓGIOS
+// =======================================================
+
 function updateClocks() {
   const now = new Date();
 
@@ -74,9 +135,6 @@ function updateClocks() {
     minute: "2-digit"
   });
 
-  const loginClock = document.getElementById("loginClock");
-  const appClock = document.getElementById("appClock");
-
   if (loginClock) loginClock.textContent = fullTime;
   if (appClock) appClock.textContent = shortTime;
 }
@@ -84,7 +142,10 @@ function updateClocks() {
 setInterval(updateClocks, 1000);
 updateClocks();
 
-// CONTEÚDOS
+// =======================================================
+// 5. CONTEÚDOS COMPLETOS
+// =======================================================
+
 const contents = {
   uc1: `
     <h2>UC1 — Requisitos de Software</h2>
@@ -95,10 +156,15 @@ const contents = {
       Eles explicam o que o sistema deve fazer, como deve funcionar e quais problemas precisa resolver.
     </p>
 
+    <p>
+      Antes de programar qualquer sistema, a equipe precisa entender o problema do cliente,
+      os usuários envolvidos, as funções obrigatórias e as limitações do projeto.
+    </p>
+
     <h3>Por que requisitos são importantes?</h3>
     <p>
-      Antes de programar, a equipe precisa entender o que o cliente quer. Sem requisitos claros,
-      o projeto pode ter retrabalho, atraso, erro de comunicação e entrega incompleta.
+      Requisitos bem definidos evitam retrabalho, atrasos, confusão entre a equipe e entregas
+      diferentes do que o cliente realmente precisa. Eles funcionam como a base do projeto.
     </p>
 
     <h3>Tipos de requisitos</h3>
@@ -106,27 +172,46 @@ const contents = {
       <li><strong>Requisitos funcionais:</strong> mostram o que o sistema deve fazer.</li>
       <li><strong>Requisitos não funcionais:</strong> mostram como o sistema deve funcionar.</li>
       <li><strong>Regras de negócio:</strong> regras específicas da empresa ou instituição.</li>
-      <li><strong>Stakeholders:</strong> pessoas interessadas no sistema, como alunos, empresas e instituição.</li>
+      <li><strong>Stakeholders:</strong> pessoas interessadas no sistema.</li>
+      <li><strong>Casos de uso:</strong> mostram interações entre usuário e sistema.</li>
+      <li><strong>Histórias de usuário:</strong> descrevem necessidades de forma simples.</li>
     </ul>
 
     <h3>Exemplos práticos</h3>
     <pre><code>Requisito funcional:
 O sistema deve permitir que o aluno faça cadastro.
 
+Requisito funcional:
+O sistema deve permitir que a empresa publique vagas.
+
 Requisito não funcional:
 O sistema deve carregar a tela inicial em até 3 segundos.
+
+Requisito não funcional:
+O sistema deve proteger os dados dos usuários.
 
 Regra de negócio:
 A empresa só pode publicar vagas após ter cadastro aprovado.</code></pre>
 
     <h3>História de usuário</h3>
     <p>
-      História de usuário é uma forma simples de escrever uma necessidade.
+      História de usuário é uma forma simples de escrever uma necessidade, usando o ponto de vista
+      de quem vai usar o sistema.
     </p>
 
     <pre><code>Como aluno,
 quero me cadastrar no sistema,
 para poder acessar vagas de estágio.</code></pre>
+
+    <pre><code>Como empresa,
+quero cadastrar vagas,
+para encontrar candidatos para estágio.</code></pre>
+
+    <h3>Exemplo no sistema de estágios</h3>
+    <p>
+      No sistema de gestão de estágios, os requisitos principais envolvem cadastro de alunos,
+      cadastro de empresas, publicação de vagas, candidatura, aprovação ou rejeição e relatórios.
+    </p>
 
     <h3>Imagens conceituais</h3>
     <div class="image-concepts">
@@ -158,7 +243,13 @@ para poder acessar vagas de estágio.</code></pre>
     <p>
       Gestão de projetos é a organização de tarefas, prazos, pessoas, recursos e entregas
       para alcançar um objetivo. Em TI, isso pode envolver sites, sistemas, aplicativos,
-      bancos de dados e automações.
+      bancos de dados, dashboards e automações.
+    </p>
+
+    <h3>Por que é importante?</h3>
+    <p>
+      Sem gestão, uma equipe pode se perder em prazos, prioridades e entregas. Com uma boa gestão,
+      o projeto fica mais claro, controlado e eficiente.
     </p>
 
     <h3>Conceitos principais</h3>
@@ -202,6 +293,15 @@ CONCLUÍDO:
       <li><strong>Cascata:</strong> rígido, sequencial e com mudanças mais difíceis.</li>
     </ul>
 
+    <h3>Exemplo de Sprint</h3>
+    <pre><code>Sprint 1:
+- Criar cadastro de usuários
+- Criar login
+- Criar tela inicial
+
+Objetivo:
+Permitir que usuários acessem o sistema com segurança.</code></pre>
+
     <h3>Imagens conceituais</h3>
     <div class="image-concepts">
       <div class="concept-image">Quadro Kanban</div>
@@ -230,8 +330,8 @@ CONCLUÍDO:
 
     <h3>O que é algoritmo?</h3>
     <p>
-      Algoritmo é uma sequência de passos usada para resolver um problema.
-      Antes de programar, o algoritmo ajuda a organizar o raciocínio.
+      Algoritmo é uma sequência de passos usada para resolver um problema. Antes de programar,
+      o algoritmo ajuda a organizar o raciocínio.
     </p>
 
     <h3>Exemplo do dia a dia</h3>
@@ -261,11 +361,17 @@ if (idade >= 18) {
   console.log("Menor de idade");
 }</code></pre>
 
-    <h3>Explicação</h3>
-    <p>
-      O programa verifica se a idade é maior ou igual a 18. Se for, mostra
-      "Maior de idade". Caso contrário, mostra "Menor de idade".
-    </p>
+    <h3>Exemplo com repetição</h3>
+    <pre><code>for (let numero = 1; numero <= 10; numero++) {
+  console.log(numero);
+}</code></pre>
+
+    <h3>Exemplo com função</h3>
+    <pre><code>function somar(a, b) {
+  return a + b;
+}
+
+console.log(somar(5, 3));</code></pre>
 
     <h3>Erro comum</h3>
     <pre><code>// Errado para comparar:
@@ -341,11 +447,16 @@ const aluno1 = new Aluno("Sr. Stark", "TI");
 
 console.log(aluno1.apresentar());</code></pre>
 
-    <h3>Exemplo prático</h3>
-    <p>
-      Um aluno pode ter nome, curso e idade. Ele também pode executar ações,
-      como apresentar-se ou consultar notas.
-    </p>
+    <h3>Exemplo com objeto</h3>
+    <pre><code>const carro = {
+  modelo: "Mustang",
+  cor: "azul",
+  acelerar: function() {
+    console.log("O carro está acelerando");
+  }
+};
+
+carro.acelerar();</code></pre>
 
     <h3>Imagens conceituais</h3>
     <div class="image-concepts">
@@ -729,20 +840,9 @@ Funções:
   `
 };
 
-// MODAL
-const modal = document.getElementById("contentModal");
-const modalContent = document.getElementById("modalContent");
-const closeModal = document.getElementById("closeModal");
-const contentButtons = document.querySelectorAll("[data-content]");
-
-// PROGRESSO DAS UCs
-const progressFill = document.getElementById("progressFill");
-const progressText = document.getElementById("progressText");
-const progressDetails = document.getElementById("progressDetails");
-
-const totalUCsProgress = 7;
-
-let completedUCs = JSON.parse(localStorage.getItem("jarvis_completed_ucs")) || [];
+// =======================================================
+// 6. PROGRESSO DAS UCs
+// =======================================================
 
 function saveProgress() {
   localStorage.setItem("jarvis_completed_ucs", JSON.stringify(completedUCs));
@@ -790,6 +890,16 @@ function completeUC(ucKey) {
   }
 }
 
+function resetProgress() {
+  completedUCs = [];
+  saveProgress();
+  updateProgress();
+}
+
+// =======================================================
+// 7. MODAL
+// =======================================================
+
 function openModal(contentKey) {
   if (!contents[contentKey]) return;
 
@@ -807,6 +917,7 @@ function openModal(contentKey) {
         </p>
 
         <button 
+          type="button"
           class="complete-uc-button ${completed ? "done" : ""}" 
           data-complete-uc="${contentKey}"
         >
@@ -821,6 +932,8 @@ function openModal(contentKey) {
 }
 
 function closeContentModal() {
+  if (!modal || !modalContent) return;
+
   modal.classList.add("hidden");
   modalContent.innerHTML = "";
 }
@@ -832,13 +945,17 @@ contentButtons.forEach(function (button) {
   });
 });
 
-closeModal.addEventListener("click", closeContentModal);
+if (closeModal) {
+  closeModal.addEventListener("click", closeContentModal);
+}
 
-modal.addEventListener("click", function (event) {
-  if (event.target === modal) {
-    closeContentModal();
-  }
-});
+if (modal) {
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closeContentModal();
+    }
+  });
+}
 
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
@@ -846,19 +963,20 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
-modalContent.addEventListener("click", function (event) {
-  const button = event.target.closest("[data-complete-uc]");
+if (modalContent) {
+  modalContent.addEventListener("click", function (event) {
+    const button = event.target.closest("[data-complete-uc]");
 
-  if (!button) return;
+    if (!button) return;
 
-  const ucKey = button.getAttribute("data-complete-uc");
-  completeUC(ucKey);
-});
+    const ucKey = button.getAttribute("data-complete-uc");
+    completeUC(ucKey);
+  });
+}
 
-// PESQUISA
-const searchInput = document.getElementById("searchInput");
-const searchableItems = document.querySelectorAll(".searchable");
-const searchStatus = document.getElementById("searchStatus");
+// =======================================================
+// 8. PESQUISA
+// =======================================================
 
 function normalizeText(text) {
   return text
@@ -867,37 +985,41 @@ function normalizeText(text) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
-searchInput.addEventListener("input", function () {
-  const value = normalizeText(searchInput.value.trim());
-  let found = 0;
+if (searchInput) {
+  searchInput.addEventListener("input", function () {
+    const value = normalizeText(searchInput.value.trim());
+    let found = 0;
 
-  searchableItems.forEach(function (item) {
-    const keywords = normalizeText(
-      item.getAttribute("data-keywords") || item.innerText
-    );
+    searchableItems.forEach(function (item) {
+      const keywords = normalizeText(
+        item.getAttribute("data-keywords") || item.innerText
+      );
 
-    if (value === "" || keywords.includes(value)) {
-      item.classList.remove("no-results");
-      found++;
-    } else {
-      item.classList.add("no-results");
+      if (value === "" || keywords.includes(value)) {
+        item.classList.remove("no-results");
+        found++;
+      } else {
+        item.classList.add("no-results");
+      }
+    });
+
+    if (searchStatus) {
+      if (value === "") {
+        searchStatus.textContent = "Digite algo para pesquisar no portal.";
+      } else if (found === 0) {
+        searchStatus.textContent = "Nenhum módulo encontrado.";
+      } else if (found === 1) {
+        searchStatus.textContent = "1 módulo encontrado.";
+      } else {
+        searchStatus.textContent = `${found} módulos encontrados.`;
+      }
     }
   });
+}
 
-  if (value === "") {
-    searchStatus.textContent = "Digite algo para pesquisar no portal.";
-  } else if (found === 0) {
-    searchStatus.textContent = "Nenhum módulo encontrado.";
-  } else if (found === 1) {
-    searchStatus.textContent = "1 módulo encontrado.";
-  } else {
-    searchStatus.textContent = `${found} módulos encontrados.`;
-  }
-});
-
-// CONTADORES
-const totalUnits = document.getElementById("totalUnits");
-const totalModules = document.getElementById("totalModules");
+// =======================================================
+// 9. CONTADORES
+// =======================================================
 
 if (totalUnits) {
   totalUnits.textContent = document.querySelectorAll(".unit-card").length;
@@ -907,7 +1029,12 @@ if (totalModules) {
   totalModules.textContent = document.querySelectorAll(".quick-card").length;
 }
 
-// INICIAR PROGRESSO
+// =======================================================
+// 10. INICIALIZAÇÃO
+// =======================================================
+
 updateProgress();
 
-console.log("J.A.R.V.I.S CORE carregado com progresso das UCs.");
+console.log("J.A.R.V.I.S CORE carregado com sucesso.");
+console.log("Login: stark");
+console.log("Senha: 1234");
