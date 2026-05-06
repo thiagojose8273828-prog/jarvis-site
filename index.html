@@ -3,74 +3,356 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>J.A.R.V.I.S CORE — Indústrias TH</title>
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="background-grid"></div>
   <div class="background-glow"></div>
 
-  <header class="topbar">
-    <div>
+  <!-- TELA DE LOGIN -->
+  <section id="loginScreen" class="login-screen">
+    <div class="login-panel">
+      <div class="reactor-login">
+        <div class="reactor-ring"></div>
+        <div class="reactor-core"></div>
+      </div>
+
+      <p class="system-tag">INDÚSTRIAS TH</p>
+
       <h1>J.A.R.V.I.S CORE</h1>
-      <p>Biblioteca inteligente de estudos — Indústrias TH</p>
-    </div>
 
-    <div class="status">
-      <span class="pulse"></span>
-      Sistema Online
-    </div>
-  </header>
+      <p class="login-subtitle">
+        Sistema inteligente de estudos, projetos e tecnologia.
+      </p>
 
-  <main id="app">
-    <section id="dashboard" class="screen active">
-      <div class="hero">
+      <form id="loginForm" class="login-form">
+        <div class="input-group">
+          <label for="username">Usuário</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Digite seu usuário"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Digite sua senha"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="login-button">
+          Entrar no Sistema
+        </button>
+      </form>
+
+      <p id="loginMessage" class="login-message">
+        Usuário: stark • Senha: 1234
+      </p>
+
+      <div class="login-footer">
+        <span>Sistema Online</span>
+        <strong id="loginClock">--:--:--</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- SISTEMA PRINCIPAL -->
+  <section id="appScreen" class="app-screen hidden">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-symbol">◉</div>
+
         <div>
-          <h2>Central de Unidades Curriculares</h2>
+          <h1>J.A.R.V.I.S CORE</h1>
+          <p>Biblioteca inteligente de estudos — Indústrias TH</p>
+        </div>
+      </div>
+
+      <nav class="top-nav">
+        <a href="#unidades">UCs</a>
+        <a href="#modulos">Módulos</a>
+        <a href="#projetos">Projetos</a>
+      </nav>
+
+      <div class="header-actions">
+        <span id="appClock">--:--</span>
+        <button id="logoutButton">Sair</button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- HERO -->
+      <section class="dashboard-hero">
+        <div class="hero-content">
+          <span class="system-chip">SISTEMA ONLINE</span>
+
+          <h2>Central de Estudos J.A.R.V.I.S</h2>
+
           <p>
-            Acesse conteúdos completos, exemplos práticos, resumos e atividades
-            de cada UC.
+            Acesse conteúdos completos, exemplos práticos, exercícios, imagens
+            conceituais e resumos para prova em cada unidade curricular.
           </p>
-        </div>
 
-        <div class="reactor">
-          <div class="reactor-core"></div>
-        </div>
-      </div>
+          <div class="search-box">
+            <label for="searchInput">Pesquisar no portal</label>
 
-      <div class="search-box">
-        <input 
-          type="text" 
-          id="searchInput" 
-          placeholder="Pesquisar conteúdo no J.A.R.V.I.S..."
-        />
-      </div>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Exemplo: banco de dados, Scrum, algoritmo, HTML..."
+            />
 
-      <section class="cards" id="ucCards"></section>
-    </section>
-
-    <section id="contentScreen" class="screen">
-      <button class="back-btn" onclick="voltarDashboard()">← Voltar ao Dashboard</button>
-
-      <article class="content-panel">
-        <div class="content-header">
-          <div class="content-icon" id="contentIcon"></div>
-
-          <div>
-            <span id="contentCode"></span>
-            <h2 id="contentTitle"></h2>
-            <p id="contentSubtitle"></p>
+            <small id="searchStatus">
+              Digite algo para pesquisar no portal.
+            </small>
           </div>
         </div>
 
-        <div id="contentBody"></div>
-      </article>
-    </section>
-  </main>
+        <div class="hero-reactor">
+          <div class="reactor-big">
+            <span></span>
+          </div>
+        </div>
 
-  <footer>
-    <p>J.A.R.V.I.S CORE — Sistema de Estudos Inteligente</p>
-  </footer>
+        <div class="status-grid">
+          <div class="stat-card">
+            <strong id="totalUnits">7</strong>
+            <span>Unidades</span>
+          </div>
+
+          <div class="stat-card">
+            <strong id="totalModules">4</strong>
+            <span>Módulos extras</span>
+          </div>
+
+          <div class="stat-card">
+            <strong>100%</strong>
+            <span>Conteúdo revisado</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- UNIDADES -->
+      <section id="unidades" class="section-block">
+        <div class="section-title">
+          <p>UNIDADES CURRICULARES</p>
+          <h2>Conteúdo principal</h2>
+        </div>
+
+        <div class="unit-grid">
+          <button
+            class="unit-card searchable"
+            data-content="uc1"
+            data-keywords="requisitos levantamento análise funcional não funcional stakeholders casos de uso histórias usuário software"
+          >
+            <span class="unit-icon">☰</span>
+
+            <div>
+              <small>UC1</small>
+              <h3>Requisitos</h3>
+              <p>Levantamento e análise de requisitos de software.</p>
+            </div>
+
+            <strong>›</strong>
+          </button>
+
+          <button
+            class="unit-card searchable"
+            data-content="uc2"
+            data-keywords="gestão projetos scrum kanban sprint backlog cascata planejamento execução controle"
+          >
+            <span class="unit-icon">▦</span>
+
+            <div>
+              <small>UC2</small>
+              <h3>Gestão de Projetos</h3>
+              <p>Planejamento, execução e controle de projetos.</p>
+            </div>
+
+            <strong>›</strong>
+          </button>
+
+          <button
+            class="unit-card searchable"
+            data-content="uc3"
+            data-keywords="algoritmos lógica programação variáveis if else laços repetição funções fluxograma"
+          >
+            <span class="unit-icon">⌘</span>
+
+            <div>
+              <small>UC3</small>
+              <h3>Algoritmos</h3>
+              <p>Lógica de programação e estruturas básicas.</p>
+            </div>
+
+            <strong>›</strong>
+          </button>
+
+          <button
+            class="unit-card searchable"
+            data-content="uc4"
+            data-keywords="programação estruturada orientada objetos classe objeto atributo método função"
+          >
+            <span class="unit-icon">&lt;/&gt;</span>
+
+            <div>
+              <small>UC4</small>
+              <h3>Programação</h3>
+              <p>Estruturada e orientada a objetos.</p>
+            </div>
+
+            <strong>›</strong>
+          </button>
+
+          <button
+            class="unit-card searchable"
+            data-content="uc5"
+            data-keywords="desktop sistemas instaláveis crud interface formulário create read update delete"
+          >
+            <span class="unit-icon">▣</span>
+
+            <div>
+              <small>UC5</small>
+              <h3>Desktop</h3>
+              <p>Sistemas instaláveis, CRUD e interfaces.</p>
+            </div>
+
+            <strong>›</strong>
+          </button>
+
+          <button
+            class="unit-card searchable"
+            data-content="uc6"
+            data-keywords="banco de dados sql modelagem tabela campo registro chave primária estrangeira"
+          >
+            <span class="unit-icon">◎</span>
+
+            <div>
+              <small>UC6</small>
+              <h3>Banco de Dados</h3>
+              <p>Modelagem, SQL e administração de dados.</p>
+            </div>
+
+            <strong>›</strong>
+          </button>
+
+          <button
+            class="unit-card searchable"
+            data-content="uc7"
+            data-keywords="web html css javascript api responsividade github pages site navegador"
+          >
+            <span class="unit-icon">◉</span>
+
+            <div>
+              <small>UC7</small>
+              <h3>Web</h3>
+              <p>Desenvolvimento web e tecnologias modernas.</p>
+            </div>
+
+            <strong>›</strong>
+          </button>
+        </div>
+      </section>
+
+      <!-- MÓDULOS EXTRAS -->
+      <section id="modulos" class="section-block">
+        <div class="section-title">
+          <p>MÓDULOS EXTRAS</p>
+          <h2>Pesquisa e prática</h2>
+        </div>
+
+        <div class="quick-grid">
+          <button
+            class="quick-card searchable"
+            data-content="ia"
+            data-keywords="ia inteligência artificial chatgpt gemini prompt automação"
+          >
+            <span>IA</span>
+            <h3>Inteligência Artificial</h3>
+            <p>Prompts, usos, exemplos e automação.</p>
+          </button>
+
+          <button
+            class="quick-card searchable"
+            data-content="github"
+            data-keywords="github git repositório commit branch pages publicar site"
+          >
+            <span>GIT</span>
+            <h3>GitHub</h3>
+            <p>Repositórios, commits e GitHub Pages.</p>
+          </button>
+
+          <button
+            class="quick-card searchable"
+            data-content="automacoes"
+            data-keywords="automação n8n api fluxo bot webhook integração"
+          >
+            <span>API</span>
+            <h3>Automações</h3>
+            <p>n8n, APIs, fluxos e integrações.</p>
+          </button>
+
+          <button
+            class="quick-card searchable"
+            data-content="projetos"
+            data-keywords="projetos portfólio entregas ti sistema login dashboard"
+          >
+            <span>DEV</span>
+            <h3>Projetos</h3>
+            <p>Ideias práticas para portfólio.</p>
+          </button>
+        </div>
+      </section>
+
+      <!-- PROJETOS -->
+      <section id="projetos" class="section-block">
+        <div class="section-title">
+          <p>MISSÕES</p>
+          <h2>Projetos recomendados</h2>
+        </div>
+
+        <div class="mission-list">
+          <div class="mission-card">
+            <h3>01 — Sistema de Login</h3>
+            <p>Usuário, senha, validação e tela protegida.</p>
+          </div>
+
+          <div class="mission-card">
+            <h3>02 — Dashboard Kanban</h3>
+            <p>Quadro com A Fazer, Em Andamento e Concluído.</p>
+          </div>
+
+          <div class="mission-card">
+            <h3>03 — CRUD de Alunos</h3>
+            <p>Cadastrar, listar, editar e excluir dados.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>J.A.R.V.I.S CORE — Sistema de Estudos Inteligente</span>
+    </footer>
+  </section>
+
+  <!-- MODAL DE CONTEÚDO -->
+  <div id="contentModal" class="modal hidden">
+    <div class="modal-box">
+      <button id="closeModal" class="close-modal">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
