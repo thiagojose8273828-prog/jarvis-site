@@ -3,375 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>J.A.R.V.I.S CORE | Portal de TI</title>
+  <title>J.A.R.V.I.S CORE — Indústrias TH</title>
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="background-glow"></div>
 
-  <!-- FUNDO HUD -->
-  <div class="hud-background"></div>
-  <div class="scan-lines"></div>
-
-  <!-- LOGIN SCREEN -->
-  <section id="loginScreen" class="login-screen">
-
-    <header class="top-hud">
-      <div class="brand">
-        <div class="brand-icon">◢</div>
-        <div>
-          <h1>STARK INDUSTRIES</h1>
-          <p>J.A.R.V.I.S CORE SYSTEM</p>
-        </div>
-      </div>
-
-      <nav class="top-nav">
-        <span>INÍCIO</span>
-        <span>SUPORTE</span>
-        <span>STATUS</span>
-        <span>BASE DE CONHECIMENTO</span>
-      </nav>
-
-      <div class="system-info">
-        <p>SISTEMA SEGURO</p>
-        <strong id="loginClock">00:00:00</strong>
-      </div>
-    </header>
-
-    <main class="login-main">
-
-      <div class="login-left">
-        <span class="system-chip">SISTEMA OPERACIONAL ONLINE</span>
-
-        <h2>J.A.R.V.I.S CORE</h2>
-
-        <p class="subtitle">
-          Portal de Apoio em Tecnologia da Informação
-        </p>
-
-        <div class="mini-status-grid">
-          <div class="mini-status-card">
-            <span>STATUS</span>
-            <strong>ONLINE</strong>
-            <p>100% disponível</p>
-          </div>
-
-          <div class="mini-status-card">
-            <span>BASE</span>
-            <strong>TI</strong>
-            <p>Conhecimento carregado</p>
-          </div>
-
-          <div class="mini-status-card large">
-            <span>CENTRAL DE AVISOS</span>
-            <p>
-              Sistema J.A.R.V.I.S preparado para suporte em unidades curriculares,
-              projetos, banco de dados, web, IA e automações.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="power-core">
-        <div class="core-ring ring-a"></div>
-        <div class="core-ring ring-b"></div>
-        <div class="core-ring ring-c"></div>
-        <div class="core-center"></div>
-        <p>POWER CORE</p>
-      </div>
-
-      <form id="loginForm" class="login-panel">
-        <div class="panel-title">
-          <span>▣</span>
-          <h3>ACESSO RESTRITO</h3>
-        </div>
-
-        <label>
-          Usuário
-          <input type="text" id="username" placeholder="Digite o usuário" autocomplete="off" />
-        </label>
-
-        <label>
-          Senha
-          <input type="password" id="password" placeholder="Digite a senha" />
-        </label>
-
-        <div class="login-options">
-          <label class="check-line">
-            <input type="checkbox" />
-            Lembrar-me
-          </label>
-
-          <button type="button" class="ghost-button">Esqueci minha senha</button>
-        </div>
-
-        <button type="submit" class="login-button">
-          Entrar
-          <span>›</span>
-        </button>
-
-        <p id="loginMessage" class="login-message"></p>
-
-        <div class="login-hint">
-          <p>Usuário: <strong>stark</strong></p>
-          <p>Senha: <strong>1234</strong></p>
-        </div>
-      </form>
-
-    </main>
-  </section>
-
-  <!-- APP SCREEN -->
-  <section id="appScreen" class="app-screen hidden">
-
-    <!-- HEADER DO PORTAL -->
-    <header class="app-header">
-      <div class="brand">
-        <div class="brand-icon">◢</div>
-        <div>
-          <h1>J.A.R.V.I.S CORE</h1>
-          <p>Portal de Apoio em Tecnologia da Informação</p>
-        </div>
-      </div>
-
-      <nav class="top-nav">
-        <a href="#dashboard">DASHBOARD</a>
-        <a href="#unidades">UNIDADES</a>
-        <a href="#extras">MÓDULOS</a>
-        <a href="#projetos">PROJETOS</a>
-      </nav>
-
-      <div class="user-area">
-        <div>
-          <span>OPERADOR</span>
-          <strong>SR. STARK</strong>
-        </div>
-
-        <button id="logoutButton">Sair</button>
-      </div>
-    </header>
-
-    <!-- DASHBOARD -->
-    <main class="app-main">
-
-      <section id="dashboard" class="dashboard-hero">
-        <div class="dashboard-text">
-          <span class="system-chip">CENTRAL DE COMANDO ATIVA</span>
-
-          <h2>Base de conhecimento em TI inicializada.</h2>
-
-          <p>
-            Cada unidade foi separada em módulos interativos para facilitar o acesso,
-            estudo, revisão e apoio para alunos da sala ou pessoas externas.
-          </p>
-
-          <div class="search-box">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Pesquisar: banco de dados, algoritmos, GitHub, IA..."
-            />
-            <span id="searchStatus">Digite algo para pesquisar no portal.</span>
-          </div>
-        </div>
-
-        <div class="system-dashboard">
-          <div class="stat-card">
-            <span>UNIDADES</span>
-            <strong id="totalUnits">7</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>MÓDULOS</span>
-            <strong id="totalModules">4</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>STATUS</span>
-            <strong>ONLINE</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>HORÁRIO</span>
-            <strong id="appClock">00:00</strong>
-          </div>
-        </div>
-      </section>
-
-      <!-- UNIDADES -->
-      <section id="unidades" class="section-block">
-        <div class="section-title">
-          <span>BASE DE CONHECIMENTO</span>
-          <h2>Unidades Curriculares</h2>
-          <p>
-            Cada unidade possui explicação detalhada, exemplo prático, erro comum e resumo rápido.
-          </p>
-        </div>
-
-        <div class="unit-grid">
-
-          <button class="unit-card searchable" data-keywords="uc1 requisitos funcionalidades levantamento análise software cliente documentação" data-content="uc1">
-            <div class="unit-icon">▤</div>
-            <div>
-              <span>UC1</span>
-              <h3>Requisitos</h3>
-              <p>Levantamento e análise de requisitos de software.</p>
-            </div>
-            <strong>›</strong>
-          </button>
-
-          <button class="unit-card searchable" data-keywords="uc2 gestão projetos scrum kanban cascata backlog sprint equipe ti" data-content="uc2">
-            <div class="unit-icon">▦</div>
-            <div>
-              <span>UC2</span>
-              <h3>Gestão de Projetos</h3>
-              <p>Planejamento, execução e controle de projetos.</p>
-            </div>
-            <strong>›</strong>
-          </button>
-
-          <button class="unit-card searchable" data-keywords="uc3 algoritmos lógica programação variáveis if else for while fluxograma" data-content="uc3">
-            <div class="unit-icon">⌘</div>
-            <div>
-              <span>UC3</span>
-              <h3>Algoritmos</h3>
-              <p>Lógica de programação e estruturas básicas.</p>
-            </div>
-            <strong>›</strong>
-          </button>
-
-          <button class="unit-card searchable" data-keywords="uc4 programação estruturada poo objetos classes métodos herança encapsulamento" data-content="uc4">
-            <div class="unit-icon">&lt;/&gt;</div>
-            <div>
-              <span>UC4</span>
-              <h3>Programação</h3>
-              <p>Estruturada e orientada a objetos.</p>
-            </div>
-            <strong>›</strong>
-          </button>
-
-          <button class="unit-card searchable" data-keywords="uc5 desktop aplicações crud telas login cadastro consulta relatório" data-content="uc5">
-            <div class="unit-icon">▣</div>
-            <div>
-              <span>UC5</span>
-              <h3>Desktop</h3>
-              <p>Sistemas instaláveis, CRUD e interfaces.</p>
-            </div>
-            <strong>›</strong>
-          </button>
-
-          <button class="unit-card searchable" data-keywords="uc6 banco dados sql tabela chave primária estrangeira der select insert update delete" data-content="uc6">
-            <div class="unit-icon">◉</div>
-            <div>
-              <span>UC6</span>
-              <h3>Banco de Dados</h3>
-              <p>Modelagem, SQL e administração de dados.</p>
-            </div>
-            <strong>›</strong>
-          </button>
-
-          <button class="unit-card searchable" data-keywords="uc7 web html css javascript front end back end api github pages deploy" data-content="uc7">
-            <div class="unit-icon">◎</div>
-            <div>
-              <span>UC7</span>
-              <h3>Web</h3>
-              <p>Desenvolvimento web e tecnologias modernas.</p>
-            </div>
-            <strong>›</strong>
-          </button>
-
-        </div>
-      </section>
-
-      <!-- MÓDULOS EXTRAS -->
-      <section id="extras" class="section-block">
-        <div class="section-title">
-          <span>MÓDULOS EXTRAS</span>
-          <h2>Áreas de Apoio</h2>
-          <p>
-            Conteúdos complementares para fortalecer o aprendizado e o portfólio.
-          </p>
-        </div>
-
-        <div class="quick-grid">
-
-          <button class="quick-card searchable" data-keywords="ia inteligência artificial gpt gemini prompt agentes api" data-content="ia">
-            <span>IA</span>
-            <h3>Assistente Inteligente</h3>
-            <p>Prompts, agentes, GPT, Gemini e APIs.</p>
-          </button>
-
-          <button class="quick-card searchable" data-keywords="github git repositório commit branch pages portfólio" data-content="github">
-            <span>GitHub</span>
-            <h3>Repositórios e Código</h3>
-            <p>Versionamento, deploy e portfólio.</p>
-          </button>
-
-          <button class="quick-card searchable" data-keywords="automação n8n webhook api fluxo bot integração" data-content="automacoes">
-            <span>Auto</span>
-            <h3>Automações</h3>
-            <p>Scripts, fluxos, APIs e n8n.</p>
-          </button>
-
-          <button class="quick-card searchable" data-keywords="projetos prática portfólio login crud dashboard sistema" data-content="projetos">
-            <span>Projetos</span>
-            <h3>Portfólio e Entregas</h3>
-            <p>Ideias práticas para treinar TI.</p>
-          </button>
-
-        </div>
-      </section>
-
-      <!-- PROJETOS -->
-      <section id="projetos" class="section-block">
-        <div class="section-title">
-          <span>MISSÕES PRÁTICAS</span>
-          <h2>Projetos recomendados</h2>
-        </div>
-
-        <div class="mission-list">
-          <div class="mission-card">
-            <h3>Sistema de Login</h3>
-            <p>Praticar HTML, CSS, JavaScript e validação de dados.</p>
-          </div>
-
-          <div class="mission-card">
-            <h3>Dashboard Kanban</h3>
-            <p>Organizar tarefas em colunas: A Fazer, Em Andamento e Concluído.</p>
-          </div>
-
-          <div class="mission-card">
-            <h3>Sistema CRUD</h3>
-            <p>Criar, consultar, editar e excluir registros.</p>
-          </div>
-
-          <div class="mission-card">
-            <h3>Banco SQL</h3>
-            <p>Modelar tabelas, relacionamentos e consultas.</p>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <footer class="app-footer">
-      <span>STARK OS v3.0</span>
-      <span>CPU 12%</span>
-      <span>MEMÓRIA 34%</span>
-      <span>REDE 1.2Gbps</span>
-      <span>BACKUP ATIVO</span>
-    </footer>
-  </section>
-
-  <!-- MODAL DE CONTEÚDO -->
-  <div id="contentModal" class="modal hidden">
-    <div class="modal-box">
-      <button id="closeModal" class="close-modal">×</button>
-
-      <div id="modalContent"></div>
+  <header class="topbar">
+    <div>
+      <h1>J.A.R.V.I.S CORE</h1>
+      <p>Biblioteca inteligente de estudos — Indústrias TH</p>
     </div>
-  </div>
+
+    <div class="status">
+      <span class="pulse"></span>
+      Sistema Online
+    </div>
+  </header>
+
+  <main id="app">
+    <section id="dashboard" class="screen active">
+      <div class="hero">
+        <div>
+          <h2>Central de Unidades Curriculares</h2>
+          <p>
+            Acesse conteúdos completos, exemplos práticos, resumos e atividades
+            de cada UC.
+          </p>
+        </div>
+
+        <div class="reactor">
+          <div class="reactor-core"></div>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Pesquisar conteúdo no J.A.R.V.I.S..."
+        />
+      </div>
+
+      <section class="cards" id="ucCards"></section>
+    </section>
+
+    <section id="contentScreen" class="screen">
+      <button class="back-btn" onclick="voltarDashboard()">← Voltar ao Dashboard</button>
+
+      <article class="content-panel">
+        <div class="content-header">
+          <div class="content-icon" id="contentIcon"></div>
+
+          <div>
+            <span id="contentCode"></span>
+            <h2 id="contentTitle"></h2>
+            <p id="contentSubtitle"></p>
+          </div>
+        </div>
+
+        <div id="contentBody"></div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>J.A.R.V.I.S CORE — Sistema de Estudos Inteligente</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
