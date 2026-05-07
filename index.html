@@ -6,476 +6,259 @@
 
   <title>J.A.R.V.I.S CORE | Portal de TI</title>
 
-  <!-- ÍCONE DO SITE -->
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-
-  <!-- CSS PRINCIPAL -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="img/jarvis-icon.png" type="image/png">
 </head>
 
 <body>
-
-  <!-- =======================================================
-       TELA DE LOGIN
-       ======================================================= -->
+  <!-- TELA DE LOGIN -->
   <section id="loginScreen" class="login-screen">
+    <div class="login-orb" aria-hidden="true"></div>
 
-    <header class="login-header">
-
-      <div class="brand-area">
-        <div class="brand-icon">S</div>
-
-        <div>
-          <h1>STARK INDUSTRIES</h1>
-          <p>J.A.R.V.I.S CORE SYSTEM</p>
-        </div>
+    <div class="login-card">
+      <div class="brand-line">
+        <span class="brand-dot"></span>
+        <span>J.A.R.V.I.S CORE</span>
       </div>
 
-      <nav class="top-nav">
-        <a href="#">Início</a>
-        <a href="#">Suporte</a>
-        <a href="#">Status</a>
-        <a href="#">Base de Conhecimento</a>
-      </nav>
+      <h1>Acesso Restrito</h1>
+      <p class="login-subtitle">
+        Portal interno de estudos, unidades curriculares, projetos e base de conhecimento.
+      </p>
 
-      <div class="login-clock-area">
-        <span>Sistema seguro</span>
-        <strong id="loginClock">00:00:00</strong>
+      <form id="loginForm" class="login-form">
+        <label for="username">Usuário</label>
+        <input type="text" id="username" autocomplete="username" placeholder="Digite seu usuário" />
+
+        <label for="password">Senha</label>
+        <input type="password" id="password" autocomplete="current-password" placeholder="Digite sua senha" />
+
+        <button type="submit">Inicializar Sistema</button>
+      </form>
+
+      <p id="loginMessage" class="login-message">Usuário: stark • Senha: 1234</p>
+
+      <div class="login-footer">
+        <span>Status: Online</span>
+        <span id="loginClock">00:00:00</span>
       </div>
-
-    </header>
-
-
-
-    <main class="login-main">
-
-      <!-- BLOCO ESQUERDO -->
-      <section class="login-info">
-
-        <p class="system-label">Sistema operacional online</p>
-
-        <h2>J.A.R.V.I.S<br>CORE</h2>
-
-        <p class="login-description">
-          Portal de Apoio em Tecnologia da Informação, estudos,
-          unidades curriculares, projetos, banco de dados, web,
-          inteligência artificial e automações.
-        </p>
-
-        <div class="access-info">
-          <span>Status: <strong>Online</strong></span>
-          <span>Base: <strong>TI carregada</strong></span>
-        </div>
-
-      </section>
-
-
-
-      <!-- REATOR CENTRAL -->
-      <section class="reactor-area">
-
-        <div class="reactor-core">
-          <div class="reactor-ring"></div>
-          <div class="reactor-center"></div>
-        </div>
-
-        <p>Power Core Online</p>
-
-      </section>
-
-
-
-      <!-- CARD DE LOGIN -->
-      <section class="login-card">
-
-        <h2>Acesso Restrito</h2>
-        <p>Entre para acessar o painel interno.</p>
-
-        <form id="loginForm">
-
-          <label for="username">Usuário</label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Digite o usuário"
-            autocomplete="off"
-          />
-
-          <label for="password">Senha</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Digite a senha"
-          />
-
-          <button type="submit" class="login-btn">
-            Entrar no Sistema
-          </button>
-
-          <p id="loginMessage" class="login-error">
-            Usuário: stark • Senha: 1234
-          </p>
-
-        </form>
-
-        <div class="login-footer-info">
-          <span>Usuário: <strong>stark</strong></span>
-          <span>Senha: <strong>1234</strong></span>
-        </div>
-
-      </section>
-
-    </main>
-
+    </div>
   </section>
 
-
-
-
-
-  <!-- =======================================================
-       INTERFACE INTERNA
-       ======================================================= -->
-  <section id="appScreen" class="app-screen hidden">
-
-    <!-- TOPO INTERNO -->
-    <header class="app-header">
-
-      <div class="app-brand">
-        <div class="brand-icon">S</div>
-
-        <div>
-          <h1>J.A.R.V.I.S CORE</h1>
-          <p>Painel interno — Indústrias TH</p>
-        </div>
+  <!-- PAINEL INTERNO -->
+  <main id="appScreen" class="app-screen hidden">
+    <header class="top-header">
+      <div class="header-brand">
+        <span class="brand-dot"></span>
+        <span>J.A.R.V.I.S CORE</span>
       </div>
 
-      <nav class="app-nav">
-        <a href="#dashboard">Início</a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
         <a href="#ucs">UCs</a>
         <a href="#projetos">Projetos</a>
-        <a href="#database">Banco de Dados</a>
+        <a href="#banco">Banco de Dados</a>
       </nav>
 
-      <div class="app-header-actions">
-        <span id="appClock">00:00</span>
-
-        <button id="logoutBtn" class="logout-btn" type="button">
-          Sair
-        </button>
+      <div class="header-actions">
+        <span id="appClock" class="clock">00:00</span>
+        <button id="logoutBtn" class="ghost-btn">Sair</button>
       </div>
-
     </header>
 
-
-
-
-
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main class="app-main" id="dashboard">
-
-      <!-- BOAS-VINDAS -->
-      <section class="hero-panel">
-
-        <div>
-          <p class="system-label">Sistema operacional</p>
-
-          <h2>
-            Bem-vindo, <span id="userNameDisplay">Stark</span>
-          </h2>
-
-          <p>
-            Painel central para acompanhar estudos, unidades curriculares,
-            projetos, conteúdos, progresso acadêmico e materiais de TI.
-          </p>
-        </div>
-
-        <div class="system-status">
-          <span class="status-dot"></span>
-          <p>Status: Online</p>
-          <strong>Modo Local Ativo</strong>
-        </div>
-
-      </section>
-
-
-
-
-
-      <!-- PROGRESSO GERAL -->
-      <section class="progress-panel">
-
-        <div class="section-title">
-          <div>
-            <p class="system-label">Controle acadêmico</p>
-            <h2>Progresso Geral</h2>
-          </div>
-
-          <span id="progressPercentText">0%</span>
-        </div>
-
-        <div class="progress-bar">
-          <div id="generalProgressFill" class="progress-fill"></div>
-        </div>
-
-        <p id="progressDescription" class="progress-description">
-          0 de 3 unidades curriculares concluídas.
+    <section id="inicio" class="hero-panel">
+      <div>
+        <p class="system-label">Sistema Operacional</p>
+        <h1>Bem-vindo, <span id="userNameDisplay">Stark</span></h1>
+        <p>
+          Painel central para acompanhar estudos, unidades curriculares, projetos,
+          conteúdos, progresso acadêmico e materiais de TI.
         </p>
-
-      </section>
-
-
-
-
-
-      <!-- CARDS RÁPIDOS -->
-      <section class="quick-cards">
-
-        <article class="quick-card">
-          <h3>Unidades Curriculares</h3>
-          <p>
-            Acompanhe as matérias, abra os conteúdos e marque as UCs concluídas.
-          </p>
-        </article>
-
-        <article class="quick-card">
-          <h3>Base de Conhecimento</h3>
-          <p>
-            Área para organizar resumos, pesquisas, exemplos e materiais importantes.
-          </p>
-        </article>
-
-        <article class="quick-card">
-          <h3>Projetos</h3>
-          <p>
-            Controle seus trabalhos, sistemas, códigos e entregas acadêmicas.
-          </p>
-        </article>
-
-        <article class="quick-card">
-          <h3>Banco de Dados</h3>
-          <p>
-            Espaço para estudos de tabelas, SQL, lógica e modelagem de dados.
-          </p>
-        </article>
-
-      </section>
-
-
-
-
-
-      <!-- UNIDADES CURRICULARES -->
-      <section class="ucs-section" id="ucs">
-
-        <div class="section-title">
-          <div>
-            <p class="system-label">Módulo acadêmico</p>
-            <h2>Unidades Curriculares</h2>
-          </div>
-
-          <button id="resetProgressBtn" class="secondary-btn" type="button">
-            Resetar progresso
-          </button>
-        </div>
-
-        <div class="uc-grid">
-
-          <!-- UC 1 -->
-          <article class="uc-card" data-uc="uc1">
-
-            <div class="uc-card-header">
-              <span class="uc-code">UC 1</span>
-              <span class="uc-status">Em andamento</span>
-            </div>
-
-            <h3>Análise de Requisitos</h3>
-
-            <p>
-              Requisitos de software, requisitos funcionais, não funcionais,
-              de negócio, sistema, usuário, exemplos e documentação.
-            </p>
-
-            <div class="mini-progress">
-              <div class="mini-progress-fill"></div>
-            </div>
-
-            <div class="uc-actions">
-              <button class="open-content-btn" type="button">
-                Abrir conteúdo
-              </button>
-
-              <button class="complete-uc-btn" type="button">
-                Concluir UC
-              </button>
-            </div>
-
-          </article>
-
-
-
-
-
-          <!-- UC 2 -->
-          <article class="uc-card" data-uc="uc2">
-
-            <div class="uc-card-header">
-              <span class="uc-code">UC 2</span>
-              <span class="uc-status">Em andamento</span>
-            </div>
-
-            <h3>Gestão de Projetos</h3>
-
-            <p>
-              Conceitos de projeto, fases, gestão, Cascata, metodologias ágeis,
-              Kanban, Scrum, XP e comparação entre modelos.
-            </p>
-
-            <div class="mini-progress">
-              <div class="mini-progress-fill"></div>
-            </div>
-
-            <div class="uc-actions">
-              <button class="open-content-btn" type="button">
-                Abrir conteúdo
-              </button>
-
-              <button class="complete-uc-btn" type="button">
-                Concluir UC
-              </button>
-            </div>
-
-          </article>
-
-
-
-
-
-          <!-- UC 3 -->
-          <article class="uc-card" data-uc="uc3">
-
-            <div class="uc-card-header">
-              <span class="uc-code">UC 3</span>
-              <span class="uc-status">Em andamento</span>
-            </div>
-
-            <h3>Scrum na Prática</h3>
-
-            <p>
-              Framework Scrum, papéis, pilares, valores, Product Backlog,
-              Sprint Backlog, incremento, eventos e boas práticas.
-            </p>
-
-            <div class="mini-progress">
-              <div class="mini-progress-fill"></div>
-            </div>
-
-            <div class="uc-actions">
-              <button class="open-content-btn" type="button">
-                Abrir conteúdo
-              </button>
-
-              <button class="complete-uc-btn" type="button">
-                Concluir UC
-              </button>
-            </div>
-
-          </article>
-
-        </div>
-
-      </section>
-
-
-
-
-
-      <!-- PROJETOS -->
-      <section class="projects-section" id="projetos">
-
-        <div class="section-title">
-          <div>
-            <p class="system-label">Área de desenvolvimento</p>
-            <h2>Projetos</h2>
-          </div>
-        </div>
-
-        <div class="project-panel">
-          <h3>Projeto Principal: Site J.A.R.V.I.S CORE</h3>
-
-          <p>
-            Sistema web com tela de login, painel interno, progresso acadêmico,
-            conteúdos por UC, interface inspirada no reator Arc e publicação
-            no GitHub Pages.
-          </p>
-
-          <div class="project-tags">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>GitHub Pages</span>
-            <span>LocalStorage</span>
-          </div>
-        </div>
-
-      </section>
-
-
-
-
-
-      <!-- BANCO DE DADOS -->
-      <section class="database-section" id="database">
-
-        <div class="section-title">
-          <div>
-            <p class="system-label">Módulo técnico</p>
-            <h2>Banco de Dados</h2>
-          </div>
-        </div>
-
-        <div class="database-panel">
-          <p>
-            Área reservada para conteúdos de banco de dados, comandos SQL,
-            tabelas, relacionamentos, exercícios e modelagem.
-          </p>
-        </div>
-
-      </section>
-
-    </main>
-
-  </section>
-
-
-
-
-
-  <!-- =======================================================
-       MODAL DE CONTEÚDO DAS UCs
-       ======================================================= -->
-  <div id="contentModal" class="content-modal hidden">
-
-    <div class="content-modal-box">
-
-      <button id="closeModal" class="close-modal" type="button">
-        ×
-      </button>
-
-      <div id="modalContent" class="modal-content">
-        <!-- O conteúdo da UC aparece aqui pelo JavaScript -->
       </div>
 
+      <div class="status-box">
+        <p><span class="status-led"></span> Status: Online</p>
+        <p>Modo Local Ativo</p>
+      </div>
+    </section>
+
+    <section class="progress-panel">
+      <div class="progress-title-row">
+        <div>
+          <p class="system-label">Controle Acadêmico</p>
+          <h2>Progresso Geral</h2>
+        </div>
+
+        <strong id="progressPercentText">0%</strong>
+      </div>
+
+      <div class="progress-track">
+        <div id="generalProgressFill" class="progress-fill"></div>
+      </div>
+
+      <p id="progressDescription">0 de 7 unidades curriculares concluídas.</p>
+    </section>
+
+    <section class="quick-grid">
+      <article class="quick-card">
+        <h3>Unidades Curriculares</h3>
+        <p>Acompanhe as matérias, abra os conteúdos e marque as UCs concluídas.</p>
+      </article>
+
+      <article class="quick-card">
+        <h3>Base de Conhecimento</h3>
+        <p>Área para organizar resumos, pesquisas, exemplos e materiais importantes.</p>
+      </article>
+
+      <article class="quick-card">
+        <h3>Projetos</h3>
+        <p>Controle seus trabalhos, sistemas, códigos e entregas acadêmicas.</p>
+      </article>
+
+      <article class="quick-card">
+        <h3>Banco de Dados</h3>
+        <p>Espaço para estudos de tabelas, SQL, lógica e modelagem de dados.</p>
+      </article>
+    </section>
+
+    <section id="ucs" class="ucs-section">
+      <div class="section-heading">
+        <div>
+          <p class="system-label">Módulo Acadêmico</p>
+          <h2>Unidades Curriculares</h2>
+        </div>
+
+        <button id="resetProgressBtn" class="ghost-btn">Resetar progresso</button>
+      </div>
+
+      <div class="uc-grid">
+        <article class="uc-card" data-uc="uc1">
+          <div class="uc-top">
+            <span class="uc-number">UC 1</span>
+            <span class="uc-status">Em andamento</span>
+          </div>
+          <h3>Análise de Requisitos</h3>
+          <p>Requisitos de software, funcionais, não funcionais, negócio, sistema, usuário e exemplos.</p>
+          <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+          <div class="uc-actions">
+            <button class="open-content-btn">Abrir conteúdo</button>
+            <button class="complete-uc-btn">Concluir UC</button>
+          </div>
+        </article>
+
+        <article class="uc-card" data-uc="uc2">
+          <div class="uc-top">
+            <span class="uc-number">UC 2</span>
+            <span class="uc-status">Em andamento</span>
+          </div>
+          <h3>Gestão de Projetos</h3>
+          <p>Projeto, Cascata, metodologias ágeis, Scrum, Kanban, XP, backlog, sprint e exemplos.</p>
+          <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+          <div class="uc-actions">
+            <button class="open-content-btn">Abrir conteúdo</button>
+            <button class="complete-uc-btn">Concluir UC</button>
+          </div>
+        </article>
+
+        <article class="uc-card" data-uc="uc3">
+          <div class="uc-top">
+            <span class="uc-number">UC 3</span>
+            <span class="uc-status">Em andamento</span>
+          </div>
+          <h3>Desenvolver Algoritmos</h3>
+          <p>Lógica, pseudocódigo, fluxogramas, decisões, repetições e exemplos em JavaScript.</p>
+          <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+          <div class="uc-actions">
+            <button class="open-content-btn">Abrir conteúdo</button>
+            <button class="complete-uc-btn">Concluir UC</button>
+          </div>
+        </article>
+
+        <article class="uc-card" data-uc="uc4">
+          <div class="uc-top">
+            <span class="uc-number">UC 4</span>
+            <span class="uc-status">Em andamento</span>
+          </div>
+          <h3>Programação Estruturada e POO</h3>
+          <p>Paradigmas, estrutura sequencial, decisão, repetição, funções, classes, objetos e métodos.</p>
+          <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+          <div class="uc-actions">
+            <button class="open-content-btn">Abrir conteúdo</button>
+            <button class="complete-uc-btn">Concluir UC</button>
+          </div>
+        </article>
+
+        <article class="uc-card" data-uc="uc5">
+          <div class="uc-top">
+            <span class="uc-number">UC 5</span>
+            <span class="uc-status">Em andamento</span>
+          </div>
+          <h3>Desenvolver Aplicações Desktop</h3>
+          <p>IDE, código, interface, banco de dados, testes, Git, disponibilização e boas práticas.</p>
+          <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+          <div class="uc-actions">
+            <button class="open-content-btn">Abrir conteúdo</button>
+            <button class="complete-uc-btn">Concluir UC</button>
+          </div>
+        </article>
+
+        <article class="uc-card" data-uc="uc6">
+          <div class="uc-top">
+            <span class="uc-number">UC 6</span>
+            <span class="uc-status">Em andamento</span>
+          </div>
+          <h3>Banco de Dados</h3>
+          <p>Tipos de banco, SGBD, tabelas, chaves, relacionamentos, SQL, CRUD e manutenção.</p>
+          <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+          <div class="uc-actions">
+            <button class="open-content-btn">Abrir conteúdo</button>
+            <button class="complete-uc-btn">Concluir UC</button>
+          </div>
+        </article>
+
+        <article class="uc-card" data-uc="uc7">
+          <div class="uc-top">
+            <span class="uc-number">UC 7</span>
+            <span class="uc-status">Em andamento</span>
+          </div>
+          <h3>Desenvolver Aplicações Web</h3>
+          <p>HTML, CSS, JavaScript, formulários, responsividade, backend, banco, testes e GitHub Pages.</p>
+          <div class="mini-progress"><div class="mini-progress-fill"></div></div>
+          <div class="uc-actions">
+            <button class="open-content-btn">Abrir conteúdo</button>
+            <button class="complete-uc-btn">Concluir UC</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projetos" class="info-section">
+      <p class="system-label">Área de Desenvolvimento</p>
+      <h2>Projetos</h2>
+      <p>
+        Espaço reservado para organizar projetos acadêmicos, códigos, entregas,
+        sistemas e atualizações futuras do J.A.R.V.I.S CORE.
+      </p>
+    </section>
+
+    <section id="banco" class="info-section">
+      <p class="system-label">Base de Dados</p>
+      <h2>Banco de Dados</h2>
+      <p>
+        Área para estudos de SQL, tabelas, relacionamentos, modelagem,
+        CRUD e manutenção de dados.
+      </p>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <section id="contentModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-box">
+      <button id="closeModal" class="close-modal" aria-label="Fechar conteúdo">×</button>
+      <div id="modalContent"></div>
     </div>
+  </section>
 
-  </div>
-
-
-
-
-
-  <!-- SCRIPT PRINCIPAL -->
   <script src="script.js"></script>
-
 </body>
 </html>
